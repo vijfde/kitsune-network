@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kitsune Network - Alpha</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link href="css/map.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="map"></div>
+    {% if show_modal_onload %}
+      <div id="modal">
+    {% else %}
+      <div id="modal" style="display:none">
+    {% endif %}
+      <div id="modal_content">
+        {% if show_pin_activated_message %}
+          <div id="pinActivatedMessage">
+            <h1>Pin Activated!</h1>
+            <img src="/images/yui_high_five.gif" />
+            <br />
+            <button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">Close</button>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div id="newPinMessage">
+      Is the marker in the correct place?
+      <br />
+      You can drag it into place.
+      <br />
+      <button class="btn btn-primary btn-block" onclick="openModalForm()">Yes</button>
+    </div>
+    <div id="newPinFormContent" class="hidden">
+      <h1>Setup your pin!</h1>
+      <form>
+        <div class="form-group">
+          <label for="inputName">Pin Name</label>
+          <input class="form-control" id="inputName">
+        </div>
+        <div class="form-group">
+          <label for="inputPinIcon">Pin Icon</label>
+          <select class="form-control" id="inputPinIcon">
+            <option value="1">Kitsune Mask</option>
+            <option value="2">Suzuka</option>
+            <option value="3">Moa</option>
+            <option value="4">Yui</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputFavMember">Favorite Member</label>
+          <select class="form-control" id="inputFavMember">
+            <option value="1">SU-METAL</option>
+            <option value="2">MOAMETAL</option>
+            <option value="3">YUIMETAL</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputFavSong">Favorite Song</label>
+          <select class="form-control" id="inputFavSong"></select>
+        </div>
+        <div class="form-group">
+          <label for="inputCommunities">Community</label>
+          <select multiple class="form-control" id="inputCommunities" aria-describedby="communityHelp"></select>
+          <small id="communityHelp" class="form-text text-muted">You can select multiple.</small>
+        </div>
+        <div class="form-group">
+          <label for="inputAboutYou">About You</label>
+          <textarea class="form-control" id="inputAboutYou" rows="3" aria-describedby="aboutYouHelp"></textarea>
+          <small id="aboutYouHelp" class="form-text text-muted">Tell everyone your BABYMETAL story?</small>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. This is only to activate your pin and allow you to edit again later.</small>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="sendActivationEmail(); return false;">Send Activation Email</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal(); return false;">Cancel</button>
+      </form>
+    </div>
+    <div id="emailSentMessage" class="hidden">
+      <h1>Activation Email Sent</h1>
+      <div style="text-align:center">
+        <p /><br />
+        An Email has been sent for you to activate your pin.
+        <p /><br />
+        It may take a few minutes to appear.
+        <br />
+        If it does not appear within 10 minutes, check your spam folder.
+        <p /><br />
+      </div>
+      <button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">Close</button>
+    </div>
+    <div id="aboutContent" class="hidden">
+      <h1>About</h1>
+      Not affiliated with BABYMETAL
+      <br />
+      <button type="button" class="btn btn-secondary btn-block" onclick="closeModal(); return false;">Cancel</button>
+    </div>
+    <script src="js/map.js"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkCmG2AHA0sr41yzJFrsXr6cl_ovUusBs&callback=initMap">
+    </script>
+  </body>
+</html>
