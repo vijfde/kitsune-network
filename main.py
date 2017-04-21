@@ -104,6 +104,7 @@ class CreatePinHandler(webapp2.RequestHandler):
         )
         new_pin.put()
         send_activate_email(email, access_uuid)
+        self.response.out.write("{}")
 
 def is_valid_email(email):
     if not email:

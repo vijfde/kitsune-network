@@ -7,21 +7,17 @@ function ready(fn) {
 }
 
 ready(function() {
-  var request = new XMLHttpRequest();
-  request.open('GET', '/json/data.json', true);
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-      var data = JSON.parse(request.responseText);
-      fillSelectWithOptions(document.getElementById('inputFavSong'), data.songs)
-      fillSelectWithOptions(document.getElementById('inputCommunities'), data.communities)
-    } else {
-      // We reached our target server, but it returned an error
+  ajax({
+    method: 'GET',
+    relativeURL: '/json/data.json',
+    success: function(json) {
+      fillSelectWithOptions(document.getElementById('inputFavSong'), json.songs);
+      fillSelectWithOptions(document.getElementById('inputCommunities'), json.communities);
+    },
+    error: function() {
+      // There was a connection error of some sort
     }
-  };
-  request.onerror = function() {
-    // There was a connection error of some sort
-  };
-  request.send();
+  });
 });
 
 function fillSelectWithOptions(select, options) {
@@ -125,28 +121,26 @@ function initMap() {
     // Browser doesn't support Geolocation
   }
 
-  var request = new XMLHttpRequest();
-  request.open('GET', '/pins', true);
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-      var data = JSON.parse(request.responseText);
-      var markers = data.map(function(pin, i) {
+  ajax({
+    method: 'GET',
+    relativeURL: '/pins',
+    success: function(json) {
+      var markers = json.map(function(pin, i) {
         var location = {lat: pin.lat, lng: pin.lng};
         var marker =  new google.maps.Marker({
           position: location,
         });
         marker.addListener('click', function() {
-          var request = new XMLHttpRequest();
-          request.open('GET', '/pin/' + pin.id, true);
-          request.onload = function() {
-            if (request.status >= 200 && request.status < 400) {
-              var data = JSON.parse(request.responseText);
+          ajax({
+            method: 'GET',
+            relativeURL: '/pin/' + pin.id,
+            success: function(json) {
               var content = document.createElement('div');
-              for (var dataKey in data) {
+              for (var jsonKey in json) {
                 // continue if the property is from prototype
-                if (!data.hasOwnProperty(dataKey)) continue;
+                if (!json.hasOwnProperty(jsonKey)) continue;
                 var p = document.createElement('p');
-                p.innerHTML = dataKey + ": " + data[dataKey];
+                p.innerHTML = jsonKey + ": " + json[jsonKey];
                 content.appendChild(p);
               }
               if (markerInfoWindow !== undefined) {
@@ -156,27 +150,21 @@ function initMap() {
                 content: content
               })
               markerInfoWindow.open(map, marker);
-            } else {
-              // We reached our target server, but it returned an error
+            },
+            error: function() {
+              // There was a connection error of some sort
             }
-          };
-          request.onerror = function() {
-            // There was a connection error of some sort
-          };
-          request.send();
+          });
         });
         return marker;
       });
       var markerCluster = new MarkerClusterer(map, markers,
           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-    } else {
-      // We reached our target server, but it returned an error
+    },
+    error: function() {
+      // There was a connection error of some sort
     }
-  };
-  request.onerror = function() {
-    // There was a connection error of some sort
-  };
-  request.send();
+  });
 
 }
 
@@ -206,24 +194,20 @@ function sendActivationEmail() {
   data.add("latitude", latlng.lat());
   data.add("longitude", latlng.lng());
 
-  var request = new XMLHttpRequest();
-  request.open('POST', '/pin', true);
-  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-      // Success!
-      // var resp = request.responseText;
+  ajax({
+    method: 'POST',
+    relativeURL: '/pin',
+    data: data,
+    success: function(json) {
       newMarkerWindow.close();
       newPinMarker.setMap(null);
-      // openModal(document.getElementById('emailSentMessage'));
-    } else {
-      // We reached our target server, but it returned an error
+      openModal(document.getElementById('emailSentMessage'));
+    },
+    error: function() {
+      // There was a connection error of some sort
     }
-  };
-  request.onerror = function() {
-    // There was a connection error of some sort
-  };
-  request.send(data.toQueryString());
+  });
+
 }
 
 function getSelectValues(select) {
@@ -254,4 +238,27 @@ function QueryStringBuilder() {
     }
     return segments.join("&");
   };
+}
+
+function ajax(settings) {
+  var request = new XMLHttpRequest();
+  request.open(settings.method, settings.relativeURL, true);
+  if (settings.method == 'POST') {
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  }
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+      var json = JSON.parse(request.responseText);
+      settings.success(json)
+    } else {
+      // We reached our target server, but it returned an error
+      settings.error();
+    }
+  };
+  request.onerror = settings.error;
+  if (settings.method == 'POST') {
+    request.send(settings.data.toQueryString());
+  } else {
+    request.send();
+  }
 }
