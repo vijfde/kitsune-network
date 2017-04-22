@@ -38,6 +38,11 @@ class MainHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         self.response.write(template.render(template_values))
 
+class ModalHandler(webapp2.RequestHandler):
+    def get(self, template_name):
+        template = JINJA_ENVIRONMENT.get_template('templates/%s.html' % template_name)
+        self.response.write(template.render())
+
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
         pins_dict = []
@@ -104,7 +109,9 @@ class CreatePinHandler(webapp2.RequestHandler):
         )
         new_pin.put()
         send_activate_email(email, access_uuid)
-        self.response.out.write("{}")
+
+        template = JINJA_ENVIRONMENT.get_template('templates/email_sent.html')
+        self.response.write(template.render())
 
 def is_valid_email(email):
     if not email:
@@ -118,6 +125,7 @@ def is_valid_email(email):
     return not email.split('@')[1] in blacklist_content
 
 def send_activate_email(recipient, access_uuid):
+    # TODO: re-enable
     return
 
     http = httplib2.Http()
@@ -156,4 +164,5 @@ app = webapp2.WSGIApplication([
     ('/pin', CreatePinHandler),
     ('/pin/(.*)', PinHandler),
     ('/pins', PinsHandler),
+    ('/modal/(new_pin_form)', ModalHandler),
 ], debug=True)

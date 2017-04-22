@@ -6,13 +6,15 @@ function ready(fn) {
   }
 }
 
+var dataDict;
+
 ready(function() {
   ajax({
     method: 'GET',
     relativeURL: '/json/data.json',
+    dataType: 'JSON',
     success: function(json) {
-      fillSelectWithOptions(document.getElementById('inputFavSong'), json.songs);
-      fillSelectWithOptions(document.getElementById('inputCommunities'), json.communities);
+      dataDict = json;
     },
     error: function() {
       // There was a connection error of some sort
@@ -20,24 +22,9 @@ ready(function() {
   });
 });
 
-function fillSelectWithOptions(select, options) {
-  for (var optionIndex in options) {
-    // continue if the property is from prototype
-    if (!options.hasOwnProperty(optionIndex)) continue;
-    var option = document.createElement('option');
-    option.value = optionIndex;
-    option.innerHTML = options[optionIndex];
-    select.appendChild(option);
-  }
-}
-
-function openModal(contentDiv) {
-  document.getElementById('modal_content').innerHTML = contentDiv.innerHTML;
+function openModal(innerHTML) {
+  document.getElementById('modal_content').innerHTML = innerHTML;
   document.getElementById('modal').style.display = "block";
-}
-
-function openModalForm() {
-  openModal(document.getElementById('newPinFormContent'));
 }
 
 function closeModal() {
@@ -79,6 +66,7 @@ function initMap() {
   ajax({
     method: 'GET',
     relativeURL: '/pins',
+    dataType: 'JSON',
     success: setupMarkers,
     error: function() {
       // There was a connection error of some sort
@@ -121,6 +109,7 @@ function showPinInfoWindow(pin, marker) {
   ajax({
     method: 'GET',
     relativeURL: '/pin/' + pin.id,
+    dataType: 'JSON',
     success: function(json) {
       var content = document.createElement('div');
       for (var jsonKey in json) {
@@ -181,11 +170,39 @@ function setupBottomCenterControl(map) {
   });
 
   showAboutUI.addEventListener('click', function() {
-    openModal(document.getElementById('aboutContent'));
+    openModal(document.getElementById('aboutContent').innerHTML);
   });
 
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);
 
+}
+
+
+function openModalForm() {
+  ajax({
+    method: 'GET',
+    relativeURL: '/modal/new_pin_form',
+    dataType: 'HTML',
+    success: function(html) {
+      openModal(html);
+      fillSelectWithOptions(document.getElementById('inputFavSong'), dataDict.songs);
+      fillSelectWithOptions(document.getElementById('inputCommunities'), dataDict.communities);
+    },
+    error: function() {
+      // There was a connection error of some sort
+    }
+  });
+}
+
+function fillSelectWithOptions(select, options) {
+  for (var optionIndex in options) {
+    // continue if the property is from prototype
+    if (!options.hasOwnProperty(optionIndex)) continue;
+    var option = document.createElement('option');
+    option.value = optionIndex;
+    option.innerHTML = options[optionIndex];
+    select.appendChild(option);
+  }
 }
 
 function sendActivationEmail() {
@@ -204,11 +221,12 @@ function sendActivationEmail() {
   ajax({
     method: 'POST',
     relativeURL: '/pin',
+    dataType: 'HTML',
     data: data,
-    success: function(json) {
+    success: function(html) {
       newMarkerWindow.close();
       newPinMarker.setMap(null);
-      openModal(document.getElementById('emailSentMessage'));
+      openModal(html);
     },
     error: function() {
       // There was a connection error of some sort
@@ -255,8 +273,12 @@ function ajax(settings) {
   }
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
-      var json = JSON.parse(request.responseText);
-      settings.success(json)
+      if (settings.dataType == "JSON") {
+        var json = JSON.parse(request.responseText);
+        settings.success(json)
+      } else {
+        settings.success(request.responseText)
+      }
     } else {
       // We reached our target server, but it returned an error
       settings.error();
