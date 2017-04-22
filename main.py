@@ -8,7 +8,7 @@ import json
 import cgi
 
 from google.appengine.ext import ndb
-from kitsunemapEntities import Pin
+from kitsunemap_entities import Pin
 from create_pin import CreatePinHandler
 
 JINJA_ENVIRONMENT = jinja2.Environment(

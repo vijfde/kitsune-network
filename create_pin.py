@@ -8,7 +8,7 @@ import urllib
 import re
 
 from google.appengine.ext import ndb
-from kitsunemapEntities import Pin
+from kitsunemap_entities import Pin
 import credentials
 
 JINJA_ENVIRONMENT = jinja2.Environment(
