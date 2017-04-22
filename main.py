@@ -7,7 +7,6 @@ import jinja2
 import json
 import cgi
 
-from google.appengine.ext import ndb
 from kitsunemap_entities import Pin
 from create_pin import CreatePinHandler
 
