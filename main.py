@@ -8,6 +8,7 @@ import json
 
 from kitsunemap_entities import Pin
 from create_pin import CreatePinHandler
+import const_data
 
 import cloudstorage as gcs
 from google.appengine.api import app_identity
@@ -36,6 +37,9 @@ class MainHandler(webapp2.RequestHandler):
 
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
+        # bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
+        # with gcs.open('/' + bucket_name + '/pins.json') as cloudstorage_file:
+        #     pins = cloudstorage_file.read()
         pins_dict = []
         for pin in Pin.query(Pin.is_activated == True).fetch():
             pin_dict = {}
@@ -53,37 +57,19 @@ class PinHandler(webapp2.RequestHandler):
             self.response.set_status(404)
             self.response.out.write("")
             return
-        bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
-        with gcs.open('/' + bucket_name + '/data.json') as cloudstorage_file:
-            data = cloudstorage_file.read()
-            data = json.loads(data)
-        members = {
-            '1': 'SU-METAL',
-            '2': 'MOAMETAL',
-            '3': 'YUIMETAL',
-            '0': 'They are all my favorite',
-        }
         template_values = {
             'pin': pin,
-            'fav_song': members[str(pin.favorite_song)],
-            'fav_member': data['songs'][str(pin.favorite_song)],
-            'communities': [data['communities'][str(community)] for community in pin.communities],
+            'fav_song': const_data.members[str(pin.favorite_song)],
+            'fav_member': const_data.songs[str(pin.favorite_song)],
+            'communities': [const_data.communities[str(community)] for community in pin.communities],
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         self.response.write(template.render(template_values))
 
 class NewPinFormHandler(webapp2.RequestHandler):
     def get(self):
-        bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
-        with gcs.open('/' + bucket_name + '/data.json') as cloudstorage_file:
-            data = cloudstorage_file.read()
-            data = json.loads(data)
-            template_values = {
-                'songs': data['songs'],
-                'communities': data['communities'],
-            }
-            template = JINJA_ENVIRONMENT.get_template('templates/new_pin_form.html')
-            self.response.write(template.render(template_values))
+        template = JINJA_ENVIRONMENT.get_template('templates/new_pin_form.html')
+        self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
