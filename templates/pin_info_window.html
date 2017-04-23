@@ -1,0 +1,11 @@
+<h3>{{ pin.name }}</h3>
+Favorite Song: <br />
+{{ fav_song }}<br />
+Favorite Member: <br />
+{{ fav_member }}<br />
+Communities: <br />
+{% for community in communities %}
+  {{ community }}<br />
+{% endfor %}
+About Me:<br />
+{{ pin.about_you }}

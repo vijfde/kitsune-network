@@ -5,10 +5,12 @@ import webapp2
 import os
 import jinja2
 import json
-import cgi
 
 from kitsunemap_entities import Pin
 from create_pin import CreatePinHandler
+
+import cloudstorage as gcs
+from google.appengine.api import app_identity
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -56,8 +58,25 @@ class PinHandler(webapp2.RequestHandler):
             self.response.set_status(404)
             self.response.out.write("")
             return
-        pin_dict = pin.to_dict(include=["name","favorite_song","communities","about_you","favorite_member"])
-        self.response.out.write(cgi.escape(json.dumps(pin_dict)))
+        bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
+        with gcs.open("/" + bucket_name + "/data.json") as cloudstorage_file:
+            data = cloudstorage_file.read()
+            data = json.loads(data)
+        members = {
+            '1': 'SU-METAL',
+            '2': 'MOAMETAL',
+            '3': 'YUIMETAL',
+            '0': 'They are all my favorite',
+        }
+        template_values = {
+            'pin': pin,
+            'fav_song': members[str(pin.favorite_song)],
+            'fav_member': data["songs"][str(pin.favorite_song)],
+            'communities': [data["communities"][str(community)] for community in pin.communities],
+        }
+        template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
+        self.response.write(template.render(template_values))
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

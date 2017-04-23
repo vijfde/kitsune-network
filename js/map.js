@@ -109,21 +109,13 @@ function showPinInfoWindow(pin, marker) {
   ajax({
     method: 'GET',
     relativeURL: '/pin/' + pin.id,
-    dataType: 'JSON',
-    success: function(json) {
-      var content = document.createElement('div');
-      for (var jsonKey in json) {
-        // continue if the property is from prototype
-        if (!json.hasOwnProperty(jsonKey)) continue;
-        var p = document.createElement('p');
-        p.innerHTML = jsonKey + ": " + json[jsonKey];
-        content.appendChild(p);
-      }
+    dataType: 'HTML',
+    success: function(html) {
       if (markerInfoWindow !== undefined) {
         markerInfoWindow.close()
       }
       markerInfoWindow = new google.maps.InfoWindow({
-        content: content
+        content: html
       })
       markerInfoWindow.open(map, marker);
     },
