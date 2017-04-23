@@ -11,6 +11,7 @@ var map, newPinMarker, newMarkerWindow, markerInfoWindow;
 
 function initMap() {
 
+  showLoadingIndicator();
   var japan = {lat: 36.2048, lng: 138.2529};
   map = new google.maps.Map(document.getElementById('map'), {
     zoomControl: true,
@@ -23,6 +24,10 @@ function initMap() {
     zoom: 5,
     styles:
      [{"elementType":"geometry","stylers":[{"color":"#212121"}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#212121"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#757575"}]},{"featureType":"administrative.country","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"administrative.land_parcel","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#bdbdbd"}]},{"featureType":"administrative.neighborhood","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#181818"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"featureType":"poi.park","elementType":"labels.text.stroke","stylers":[{"color":"#1b1b1b"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#c50000"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#c50000"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#8a8a8a"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#373737"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#c50000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#c50000"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#3c3c3c"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#c50000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#c50000"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry","stylers":[{"color":"#4e4e4e"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.fill","stylers":[{"color":"#c50000"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.stroke","stylers":[{"color":"#c50000"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"#c50000"}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#c50000"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#3d3d3d"}]}]
+  });
+  var mapLoadListener = map.addListener('tilesloaded', function() {
+    hideLoadingIndicator();
+    google.maps.event.removeListener(mapLoadListener);
   });
 
   setupBottomCenterControl(map);
@@ -220,7 +225,23 @@ function QueryStringBuilder() {
   };
 }
 
+var loadingCount = 0;
+function showLoadingIndicator() {
+  loadingCount += 2;// once for actual show and once for min show timer
+  var loadingImage = document.getElementById("loadingImage");
+  loadingImage.style.display = "block";
+  window.setTimeout(hideLoadingIndicator, 500);
+}
+
+function hideLoadingIndicator() {
+  loadingCount--;
+  if (loadingCount > 0) { return }
+  var loadingImage = document.getElementById("loadingImage");
+  loadingImage.style.display = "none";
+}
+
 function ajax(settings) {
+  showLoadingIndicator();
   var request = new XMLHttpRequest();
   request.open(settings.method, settings.relativeURL, true);
   if (settings.method == 'POST') {
@@ -238,8 +259,12 @@ function ajax(settings) {
       // We reached our target server, but it returned an error
       settings.error();
     }
+    hideLoadingIndicator();
   };
-  request.onerror = settings.error;
+  request.onerror = function() {
+    settings.onerror();
+    hideLoadingIndicator();
+  };
   if (settings.method == 'POST') {
     request.send(settings.data.toQueryString());
   } else {
