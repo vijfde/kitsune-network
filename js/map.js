@@ -1,27 +1,3 @@
-function ready(fn) {
-  if (document.readyState != 'loading'){
-    fn();
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
-}
-
-var dataDict;
-
-ready(function() {
-  ajax({
-    method: 'GET',
-    relativeURL: '/json/data.json',
-    dataType: 'JSON',
-    success: function(json) {
-      dataDict = json;
-    },
-    error: function() {
-      // There was a connection error of some sort
-    }
-  });
-});
-
 function openModal(innerHTML) {
   document.getElementById('modal_content').innerHTML = innerHTML;
   document.getElementById('modal').style.display = "block";
@@ -173,28 +149,15 @@ function setupBottomCenterControl(map) {
 function openModalForm() {
   ajax({
     method: 'GET',
-    relativeURL: '/modal/new_pin_form',
+    relativeURL: '/new_pin_form.html',
     dataType: 'HTML',
     success: function(html) {
       openModal(html);
-      fillSelectWithOptions(document.getElementById('inputFavSong'), dataDict.songs);
-      fillSelectWithOptions(document.getElementById('inputCommunities'), dataDict.communities);
     },
     error: function() {
       // There was a connection error of some sort
     }
   });
-}
-
-function fillSelectWithOptions(select, options) {
-  for (var optionIndex in options) {
-    // continue if the property is from prototype
-    if (!options.hasOwnProperty(optionIndex)) continue;
-    var option = document.createElement('option');
-    option.value = optionIndex;
-    option.innerHTML = options[optionIndex];
-    select.appendChild(option);
-  }
 }
 
 function sendActivationEmail() {

@@ -34,11 +34,6 @@ class MainHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         self.response.write(template.render(template_values))
 
-class ModalHandler(webapp2.RequestHandler):
-    def get(self, template_name):
-        template = JINJA_ENVIRONMENT.get_template('templates/%s.html' % template_name)
-        self.response.write(template.render())
-
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
         pins_dict = []
@@ -59,7 +54,7 @@ class PinHandler(webapp2.RequestHandler):
             self.response.out.write("")
             return
         bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
-        with gcs.open("/" + bucket_name + "/data.json") as cloudstorage_file:
+        with gcs.open('/' + bucket_name + '/data.json') as cloudstorage_file:
             data = cloudstorage_file.read()
             data = json.loads(data)
         members = {
@@ -71,17 +66,29 @@ class PinHandler(webapp2.RequestHandler):
         template_values = {
             'pin': pin,
             'fav_song': members[str(pin.favorite_song)],
-            'fav_member': data["songs"][str(pin.favorite_song)],
-            'communities': [data["communities"][str(community)] for community in pin.communities],
+            'fav_member': data['songs'][str(pin.favorite_song)],
+            'communities': [data['communities'][str(community)] for community in pin.communities],
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         self.response.write(template.render(template_values))
 
+class NewPinFormHandler(webapp2.RequestHandler):
+    def get(self):
+        bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
+        with gcs.open('/' + bucket_name + '/data.json') as cloudstorage_file:
+            data = cloudstorage_file.read()
+            data = json.loads(data)
+            template_values = {
+                'songs': data['songs'],
+                'communities': data['communities'],
+            }
+            template = JINJA_ENVIRONMENT.get_template('templates/new_pin_form.html')
+            self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/pin', CreatePinHandler),
     ('/pin/(.*)', PinHandler),
     ('/pins', PinsHandler),
-    ('/modal/(new_pin_form)', ModalHandler),
+    ('/new_pin_form.html', NewPinFormHandler),
 ], debug=True)

@@ -10,8 +10,6 @@ handlers:
   upload: favicon\.ico
 - url: /js
   static_dir: js
-- url: /json
-  static_dir: json
 - url: /css
   static_dir: css
 - url: /images
