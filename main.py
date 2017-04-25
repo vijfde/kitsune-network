@@ -59,8 +59,8 @@ class PinHandler(webapp2.RequestHandler):
             return
         template_values = {
             'pin': pin,
-            'fav_song': const_data.members[str(pin.favorite_song)],
-            'fav_member': const_data.songs[str(pin.favorite_song)],
+            'fav_song': const_data.songs[str(pin.favorite_song)],
+            'fav_member': const_data.members[str(pin.favorite_member)],
             'communities': [const_data.communities[str(community)] for community in pin.communities],
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
