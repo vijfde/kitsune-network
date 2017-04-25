@@ -37,7 +37,9 @@ class CreatePinHandler(webapp2.RequestHandler):
         if not name or not about_you or not is_valid_email(email):
             is_form_valid = False
 
-        # TODO: Check for email already in db (save in lowercase)
+        existing_pin = Pin.query(Pin.email == email).get()
+        if existing_pin:
+            is_form_valid = False
 
         if not is_form_valid:
             self.response.set_status(400)
