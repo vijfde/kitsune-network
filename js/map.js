@@ -165,7 +165,15 @@ function openModalForm() {
           if (el.value.length > 0) {
             className = "has-success";
           }
+          if (el.type == "email") {
+            if (validateEmail(el.value)) {
+              className = "has-success";
+            } else {
+              className = "has-warning";
+            }
+          }
           var parent = el.parentNode;
+          parent.classList.remove("has-warning");
           parent.classList.remove("has-error");
           parent.classList.remove("has-success");
           parent.classList.add(className);
@@ -176,6 +184,11 @@ function openModalForm() {
       // There was a connection error of some sort
     }
   });
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
 function sendActivationEmail() {
