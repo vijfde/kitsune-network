@@ -6,6 +6,7 @@ import uuid
 import httplib2
 import urllib
 import re
+import json
 
 from google.appengine.ext import ndb
 from kitsunemap_entities import Pin
@@ -34,7 +35,10 @@ class CreatePinHandler(webapp2.RequestHandler):
         except:
             is_form_valid = False
 
-        if not name or not about_you or not is_valid_email(email):
+        if not name or not about_you:
+            is_form_valid = False
+
+        if not is_valid_email(email) or not is_real_email(email):
             is_form_valid = False
 
         existing_pin = Pin.query(Pin.email == email).get()
@@ -76,6 +80,21 @@ def is_valid_email(email):
     blacklist = open('disposable-email-domains/disposable_email_blacklist.conf')
     blacklist_content = [line.rstrip() for line in blacklist.readlines()]
     return not email.split('@')[1] in blacklist_content
+
+def is_real_email(email):
+    http = httplib2.Http()
+    http.add_credentials('api', credentials.MAILGUN_PUB_API_KEY)
+
+    data = { 'address': email }
+    url = 'https://api.mailgun.net/v3/address/validate?' + urllib.urlencode(data)
+    resp, content = http.request(url, 'GET')
+
+    if resp.status != 200:
+        raise RuntimeError(
+            'Mailgun API error: {} {}'.format(resp.status, content))
+
+    response_json = json.loads(content)
+    return response_json["is_valid"]
 
 def send_activate_email(recipient, access_uuid):
     # TODO: re-enable
