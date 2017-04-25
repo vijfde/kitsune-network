@@ -1,11 +1,11 @@
 <h1>Setup your pin!</h1>
 <form>
   <div class="form-group">
-    <label for="inputName">Pin Name</label>
+    <label class="control-label" for="inputName">Pin Name</label>
     <input class="form-control" id="inputName">
   </div>
   <div class="form-group">
-    <label for="inputPinIcon">Pin Icon</label>
+    <label class="control-label" for="inputPinIcon">Pin Icon</label>
     <select class="form-control" id="inputPinIcon">
       <option value="">Select One</option>
       <option value="1">Kitsune Mask</option>
@@ -15,7 +15,7 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="inputFavMember">Favorite Member</label>
+    <label class="control-label" for="inputFavMember">Favorite Member</label>
     <select class="form-control" id="inputFavMember">
       <option value="">Select One</option>
       <option value="0">They are all my favorite</option>
@@ -25,7 +25,7 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="inputFavSong">Favorite Song</label>
+    <label class="control-label" for="inputFavSong">Favorite Song</label>
     <select class="form-control" id="inputFavSong">
       <option value="">Select One</option>
       <option value="0">They are all my favorite</option>
@@ -58,7 +58,7 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="inputCommunities">Community</label>
+    <label class="control-label" for="inputCommunities">Community</label>
     <select multiple="" class="form-control" id="inputCommunities" aria-describedby="communityHelp">
       <option value="0">None</option>
       <option value="1">THE ONE</option>
@@ -68,15 +68,15 @@
     <small id="communityHelp" class="form-text text-muted">You can select multiple.</small>
   </div>
   <div class="form-group">
-    <label for="inputAboutYou">About You</label>
+    <label class="control-label" for="inputAboutYou">About You</label>
     <textarea class="form-control" id="inputAboutYou" rows="3" aria-describedby="aboutYouHelp"></textarea>
     <small id="aboutYouHelp" class="form-text text-muted">Tell everyone your BABYMETAL story?</small>
   </div>
   <div class="form-group">
-    <label for="inputEmail">Email address</label>
+    <label class="control-label" for="inputEmail">Email address</label>
     <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. This is only to activate your pin and allow you to edit again later.</small>
   </div>
   <button type="button" class="btn btn-primary" onclick="sendActivationEmail(); return false;">Send Activation Email</button>
-  <button type="button" class="btn btn-secondary" onclick="closeModal(); return false;">Cancel</button>
+  <button type="button" class="btn btn-default" onclick="closeModal(); return false;">Cancel</button>
 </form>

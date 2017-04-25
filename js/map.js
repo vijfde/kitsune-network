@@ -158,6 +158,19 @@ function openModalForm() {
     dataType: 'HTML',
     success: function(html) {
       openModal(html);
+      var inputs = document.querySelectorAll("input, select, textarea");
+      Array.prototype.forEach.call(inputs, function(el, i){
+        el.addEventListener("input", function () {
+          var className = "has-error";
+          if (el.value.length > 0) {
+            className = "has-success";
+          }
+          var parent = el.parentNode;
+          parent.classList.remove("has-error");
+          parent.classList.remove("has-success");
+          parent.classList.add(className);
+        });
+      });
     },
     error: function() {
       // There was a connection error of some sort
