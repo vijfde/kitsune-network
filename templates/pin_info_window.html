@@ -8,4 +8,6 @@ Communities: <br />
   {{ community }}<br />
 {% endfor %}
 About Me:<br />
-{{ pin.about_you }}
+{% for line in pin.about_you.splitlines() %}
+    {{line}}<br />
+{% endfor %}
