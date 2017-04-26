@@ -257,7 +257,7 @@ function showLoadingIndicator() {
   loadingCount += 2;// once for actual show and once for min show timer
   var loadingImage = document.getElementById("loadingImage");
   loadingImage.style.display = "block";
-  window.setTimeout(hideLoadingIndicator, 500);
+  window.setTimeout(hideLoadingIndicator, 250);
 }
 
 function hideLoadingIndicator() {
