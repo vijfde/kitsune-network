@@ -27,11 +27,12 @@ class CreatePinHandler(webapp2.RequestHandler):
             pin_icon = int(self.request.POST.get('pin_icon'))
             favorite_member = int(self.request.POST.get('favorite_member'))
             favorite_song = int(self.request.POST.get('favorite_song'))
-            communities = self.request.POST.get('communities')
-            communities_list = ([int(x.strip()) for x in communities.split(',')])
             latitude = self.request.POST.get('latitude')
             longitude = self.request.POST.get('longitude')
             geo_point = ndb.GeoPt(latitude, longitude)
+            communities = self.request.POST.get('communities')
+             # this will raise an error if the communities string is invalid
+            [int(x) for x in communities.split(',')]
 
             if not name or not about_you or not email:
                 form_error_message = "All fields are required."
@@ -56,7 +57,7 @@ class CreatePinHandler(webapp2.RequestHandler):
             pin_icon = pin_icon,
             favorite_member = favorite_member,
             favorite_song = favorite_song,
-            communities = communities_list,
+            communities = communities,
             point = geo_point,
             access_uuid = access_uuid,
             user_ip_address = user_ip_address,

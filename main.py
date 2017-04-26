@@ -45,7 +45,7 @@ def send_discord_web_hook(pin):
     pin_details += '\nTitle: ' + pin.name
     pin_details += '\nFav Song: ' + const_data.songs[str(pin.favorite_song)]
     pin_details += '\nFav Member: ' + const_data.members[str(pin.favorite_member)]
-    pin_details += '\nCommunities: ' + ', '.join([const_data.communities[str(community)] for community in pin.communities])
+    pin_details += '\nCommunities: ' + ', '.join([const_data.communities[str(community)] for community in pin.communities.split(',')])
     pin_details += '\nAbout: \n' + pin.about_you
     data = {
         'content': """
@@ -81,7 +81,7 @@ class PinHandler(webapp2.RequestHandler):
             'pin': pin,
             'fav_song': const_data.songs[str(pin.favorite_song)],
             'fav_member': const_data.members[str(pin.favorite_member)],
-            'communities': [const_data.communities[str(community)] for community in pin.communities],
+            'communities': [const_data.communities[str(community)] for community in pin.communities.split(',')],
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         self.response.write(template.render(template_values))

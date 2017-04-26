@@ -14,4 +14,4 @@ class Pin(ndb.Model):
     pin_icon = ndb.IntegerProperty(required=True)
     favorite_member = ndb.IntegerProperty(required=True)
     favorite_song = ndb.IntegerProperty(required=True)
-    communities = ndb.IntegerProperty(repeated=True)
+    communities = ndb.StringProperty(required=True)
