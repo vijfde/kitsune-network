@@ -94,9 +94,6 @@ def is_real_email(email):
     return response_json["is_valid"]
 
 def send_activate_email(recipient, access_uuid):
-    # TODO: re-enable
-    return
-
     http = httplib2.Http()
     http.add_credentials('api', credentials.MAILGUN_API_KEY)
 
