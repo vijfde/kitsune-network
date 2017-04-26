@@ -19,7 +19,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class CreatePinHandler(webapp2.RequestHandler):
     def post(self):
-        is_form_valid = True
+        form_error_message = None
         try:
             name = self.request.POST.get('name').strip()
             about_you = self.request.POST.get('about_you').strip()
@@ -32,22 +32,19 @@ class CreatePinHandler(webapp2.RequestHandler):
             latitude = self.request.POST.get('latitude')
             longitude = self.request.POST.get('longitude')
             geo_point = ndb.GeoPt(latitude, longitude)
+
+            if not name or not about_you or not email:
+                form_error_message = "All fields are required."
+            elif not is_valid_email(email) or not is_real_email(email):
+                form_error_message = "A valid email address is required."
+            elif Pin.query(Pin.email == email).get():
+                form_error_message = "A pin already exists for this email address."
         except:
-            is_form_valid = False
+            form_error_message = "All fields are required."
 
-        if not name or not about_you:
-            is_form_valid = False
-
-        if not is_valid_email(email) or not is_real_email(email):
-            is_form_valid = False
-
-        existing_pin = Pin.query(Pin.email == email).get()
-        if existing_pin:
-            is_form_valid = False
-
-        if not is_form_valid:
+        if form_error_message:
             self.response.set_status(400)
-            self.response.out.write("")
+            self.response.out.write(form_error_message)
             return
 
         access_uuid = base64.urlsafe_b64encode(uuid.uuid4().bytes).replace('=', '')

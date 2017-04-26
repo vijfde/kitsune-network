@@ -191,7 +191,7 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-function sendActivationEmail() {
+function submitNewPinForm() {
   var data = new QueryStringBuilder();
   data.add("name", document.getElementById('inputName').value);
   data.add("about_you", document.getElementById('inputAboutYou').value);
@@ -214,8 +214,9 @@ function sendActivationEmail() {
       newPinMarker.setMap(null);
       openModal(html);
     },
-    error: function() {
-      // There was a connection error of some sort
+    error: function(html) {
+      var formErrorElement = document.getElementById("formError");
+      formErrorElement.innerHTML = html
     }
   });
 
@@ -283,12 +284,12 @@ function ajax(settings) {
       }
     } else {
       // We reached our target server, but it returned an error
-      settings.error();
+      settings.error(request.responseText);
     }
     hideLoadingIndicator();
   };
   request.onerror = function() {
-    settings.onerror();
+    settings.error("");
     hideLoadingIndicator();
   };
   if (settings.method == 'POST') {
