@@ -5,10 +5,13 @@ import webapp2
 import os
 import jinja2
 import json
+import httplib2
+import urllib
 
 from kitsunemap_entities import Pin
 from create_pin import CreatePinHandler
 import const_data
+import credentials
 
 import cloudstorage as gcs
 from google.appengine.api import app_identity
@@ -29,11 +32,28 @@ class MainHandler(webapp2.RequestHandler):
                 pin.is_activated = True
                 pin.access_uuid = ""
                 pin.put()
+                send_discord_web_hook(pin)
                 show_modal_onload = True
                 template_values["show_pin_activated_message"] = True
         template_values["show_modal_onload"] = show_modal_onload
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         self.response.write(template.render(template_values))
+
+def send_discord_web_hook(pin):
+    http = httplib2.Http()
+    pin_details = ''
+    pin_details += '\nTitle: ' + pin.name
+    pin_details += '\nFav Song: ' + const_data.songs[str(pin.favorite_song)]
+    pin_details += '\nFav Member: ' + const_data.members[str(pin.favorite_member)]
+    pin_details += '\nCommunities: ' + ', '.join([const_data.communities[str(community)] for community in pin.communities])
+    pin_details += '\nAbout: \n' + pin.about_you
+    data = {
+        'content': """
+            **New Pin Activated!**```%s```
+        """ % pin_details
+    }
+    url = credentials.DISCORD_WEB_HOOK_URL
+    resp, content = http.request(url, 'POST', urllib.urlencode(data))
 
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
