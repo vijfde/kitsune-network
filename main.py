@@ -15,6 +15,7 @@ import credentials
 
 import cloudstorage as gcs
 from google.appengine.api import app_identity
+from google.appengine.api import taskqueue
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -26,34 +27,38 @@ class MainHandler(webapp2.RequestHandler):
         template_values = {}
         show_modal_onload = False
         activate_pin_uuid = self.request.GET.get('activatePin')
-        if activate_pin_uuid != None:
-            pin = Pin.query(Pin.access_uuid == activate_pin_uuid).get()
-            if pin != None:
-                pin.is_activated = True
-                pin.access_uuid = ""
-                pin.put()
-                send_discord_web_hook(pin)
-                show_modal_onload = True
-                template_values["show_pin_activated_message"] = True
+        if activate_pin_uuid != None and activate_pin(activate_pin_uuid):
+            show_modal_onload = True
+            template_values["show_pin_activated_message"] = True
         template_values["show_modal_onload"] = show_modal_onload
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         self.response.write(template.render(template_values))
 
+def activate_pin(activate_pin_uuid):
+    ''' Activate a pin, returns if the activation was a success '''
+    pin = Pin.query(Pin.access_uuid == activate_pin_uuid).get()
+    if not pin:
+        return False
+    pin.is_activated = True
+    pin.access_uuid = ""
+    pin.put()
+    send_discord_web_hook(pin)
+    # task = taskqueue.add(
+    #     url = '/update_pins_json',
+    #     target = 'worker',
+    #     params = { 'pin_id': pin.key.id() })
+    return True
+
 def send_discord_web_hook(pin):
-    http = httplib2.Http()
-    pin_details = ''
-    pin_details += '\nTitle: ' + pin.name
+    pin_details = 'Title: ' + pin.name
     pin_details += '\nFav Song: ' + const_data.songs[str(pin.favorite_song)]
     pin_details += '\nFav Member: ' + const_data.members[str(pin.favorite_member)]
     pin_details += '\nCommunities: ' + ', '.join([const_data.communities[str(community)] for community in pin.communities.split(',')])
     pin_details += '\nAbout: \n' + pin.about_you
-    content = """
-        **New Pin Activated!**```%s```
-    """ % pin_details
-    content = content.encode('utf-8', 'ignore')
-    data = { 'content': content }
-    url = credentials.DISCORD_WEB_HOOK_URL
-    resp, content = http.request(url, 'POST', urllib.urlencode(data))
+    content = """**New Pin Activated!**```%s```""" % pin_details
+    task = taskqueue.add(
+        url = '/tasks/send_discord_web_hook',
+        params = { 'message': content })
 
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
