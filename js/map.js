@@ -7,7 +7,7 @@ function closeModal() {
   document.getElementById('modal').style.display = "none";
 }
 
-var map, newPinMarker, newMarkerWindow, markerInfoWindow;
+var map, newPinMarker, markerInfoWindow;
 
 function initMap() {
 
@@ -34,13 +34,6 @@ function initMap() {
   var logoDiv = document.createElement('div');
   logoDiv.innerHTML = "<img id='logoImg' src='/images/logo.png' />";
   map.controls[google.maps.ControlPosition.TOP].push(logoDiv);
-
-  newMarkerWindow = new google.maps.InfoWindow({
-    content: document.getElementById('newPinMessage')
-  })
-  google.maps.event.addListener(newMarkerWindow, 'closeclick', function() {
-    newPinMarker.setMap(null);
-  });
 
   // get and setup markers
   ajax({
@@ -137,7 +130,16 @@ function setupBottomCenterControl(map) {
       animation: google.maps.Animation.DROP,
       draggable:true
     });
-    newMarkerWindow.open(map, newPinMarker);
+    if (markerInfoWindow !== undefined) {
+      markerInfoWindow.close()
+    }
+    markerInfoWindow = new google.maps.InfoWindow({
+      content: document.getElementById('newPinMessage').innerHTML
+    })
+    google.maps.event.addListener(markerInfoWindow, 'closeclick', function() {
+      newPinMarker.setMap(null);
+    });
+    markerInfoWindow.open(map, newPinMarker);
     document.getElementById('newPinMessage').style.display = "block";
   });
 
@@ -209,7 +211,7 @@ function submitNewPinForm() {
     dataType: 'HTML',
     data: data,
     success: function(html) {
-      newMarkerWindow.close();
+      markerInfoWindow.close();
       newPinMarker.setMap(null);
       openModal(html);
     },
