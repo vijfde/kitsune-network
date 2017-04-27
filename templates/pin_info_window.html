@@ -1,13 +1,11 @@
-<h3>{{ pin.name }}</h3>
-Favorite Song: <br />
-{{ fav_song }}<br />
-Favorite Member: <br />
-{{ fav_member }}<br />
-Communities: <br />
+<h4>{{ pin.name }}</h4>
+<b>Favorite Song:</b> {{ fav_song }}<br />
+<b>Favorite Member:</b> {{ fav_member }}<br />
+<b>Communities:</b> <br />
 {% for community in communities %}
   {{ community }}<br />
 {% endfor %}
-About Me:<br />
+<b>About Me:</b><br />
 {% for line in pin.about_you.splitlines() %}
     {{line}}<br />
 {% endfor %}
