@@ -100,7 +100,7 @@ def send_activate_email(recipient, access_uuid):
 
     activation_url = "https://kitsune.network/?activatePin=%s" % access_uuid
     html_message = """
-        <a href="%s">Click here to activiate your pin.</a>
+        <a href="%s">Click here to activate your pin.</a>
         <p />
         Or copy and paste this URL into your browser:
         <br />
