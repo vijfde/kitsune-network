@@ -68,8 +68,8 @@ function setupMarkers(json) {
     var location = {lat: pin.lat, lng: pin.lng};
     var image = {
       url: '/images/pins/kitsune_mask.png',
-      // This marker is 20 pixels wide by 32 pixels high.
       size: new google.maps.Size(35, 58),
+      anchor: new google.maps.Point(35 / 2, 58 / 2)
     };
     var marker =  new google.maps.Marker({
       position: location,
