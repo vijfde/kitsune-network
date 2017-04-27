@@ -32,8 +32,7 @@ function initMap() {
 
   setupBottomCenterControl(map);
   var logoDiv = document.createElement('div');
-  logoDiv.style['color'] = 'white';
-  logoDiv.innerHTML = "<h1>Kitsune Network!</h1>";
+  logoDiv.innerHTML = "<img id='logoImg' src='/images/logo.png' />";
   map.controls[google.maps.ControlPosition.TOP].push(logoDiv);
 
   newMarkerWindow = new google.maps.InfoWindow({

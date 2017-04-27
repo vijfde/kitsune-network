@@ -6,7 +6,10 @@ html, body {
 .hidden {
   display: none;
 }
-
+#logoImg {
+  width: 350px;
+  padding-top: 20px;
+}
 #loadingImage {
     position: absolute;
     z-index: 10000;
