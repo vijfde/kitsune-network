@@ -47,11 +47,11 @@ def send_discord_web_hook(pin):
     pin_details += '\nFav Member: ' + const_data.members[str(pin.favorite_member)]
     pin_details += '\nCommunities: ' + ', '.join([const_data.communities[str(community)] for community in pin.communities.split(',')])
     pin_details += '\nAbout: \n' + pin.about_you
-    data = {
-        'content': """
-            **New Pin Activated!**```%s```
-        """ % pin_details
-    }
+    content = """
+        **New Pin Activated!**```%s```
+    """ % pin_details
+    content = content.encode('utf-8', 'ignore')
+    data = { 'content': content }
     url = credentials.DISCORD_WEB_HOOK_URL
     resp, content = http.request(url, 'POST', urllib.urlencode(data))
 
