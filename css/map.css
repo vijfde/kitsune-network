@@ -6,6 +6,19 @@ html, body {
 .hidden {
   display: none;
 }
+
+.btn-discord {
+  background-color: #7289DA;
+  display: inline-block !important;
+  text-align: center;
+  color: white !important;
+}
+.btn-discord img {
+  height: 45px;
+  width: 45px !important;
+  float: left;
+}
+
 #logoImg {
   width: 350px;
   padding-top: 20px;
