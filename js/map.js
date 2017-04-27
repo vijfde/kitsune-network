@@ -66,14 +66,21 @@ function initMap() {
 function setupMarkers(json) {
   var markers = json.map(function(pin, i) {
     var location = {lat: pin.lat, lng: pin.lng};
+    var image = {
+      url: '/images/pins/kitsune_mask.png',
+      // This marker is 20 pixels wide by 32 pixels high.
+      size: new google.maps.Size(35, 58),
+    };
     var marker =  new google.maps.Marker({
       position: location,
+      icon: image,
     });
     marker.addListener('click', function() {
       showPinInfoWindow(pin, marker);
     });
     return marker;
   });
+  // https://github.com/googlemaps/v3-utility-library/blob/master/markerclusterer/src/markerclusterer.js
   var markerCluster = new MarkerClusterer(map, markers,
       {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }
