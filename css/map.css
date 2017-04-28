@@ -66,10 +66,18 @@ html, body {
   margin-top: 0px;
   text-align: center;
 }
-#modal_content img {
+#yui_high_five {
   margin: 0 auto 0 auto;
   width: 300px;
   display: block;
+}
+.pin-input {
+  width: 50px;
+  display: inline-block;
+}
+.pin-input img {
+  width: 35px;
+  cursor: pointer;
 }
 #addPinUI, #showAboutUI {
   background-color: #fff;

@@ -166,6 +166,14 @@ function openModalForm() {
     dataType: 'HTML',
     success: function(html) {
       openModal(html);
+      var pinInputs = document.querySelectorAll(".pin-input");
+      Array.prototype.forEach.call(pinInputs, function(el, i){
+        var pinInput = el.querySelectorAll("img")[0];
+        var pinRadio = el.querySelectorAll("input")[0];
+        pinInput.addEventListener("click", function() {
+          pinRadio.checked = true;
+        });
+      });
       var inputs = document.querySelectorAll("input, select, textarea");
       Array.prototype.forEach.call(inputs, function(el, i){
         el.addEventListener("input", function () {
@@ -204,13 +212,20 @@ function submitNewPinForm() {
   data.add("name", document.getElementById('inputName').value);
   data.add("about_you", document.getElementById('inputAboutYou').value);
   data.add("email", document.getElementById('inputEmail').value);
-  data.add("pin_icon", document.getElementById('inputPinIcon').value);
   data.add("favorite_member", document.getElementById('inputFavMember').value);
   data.add("favorite_song", document.getElementById('inputFavSong').value);
   data.add("communities", getSelectValues(document.getElementById('inputCommunities')));
   var latlng = newPinMarker.getPosition();
   data.add("latitude", latlng.lat());
   data.add("longitude", latlng.lng());
+
+  var pinRadios = document.getElementsByName('inputPinIcon');
+  for (var i = 0, length = pinRadios.length; i < length; i++) {
+      if (pinRadios[i].checked) {
+          data.add("pin_icon", pinRadios[i].value);
+          break;
+      }
+  }
 
   ajax({
     method: 'POST',
