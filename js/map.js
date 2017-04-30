@@ -67,9 +67,9 @@ function setupMarkers(json) {
   var markers = json.map(function(pin, i) {
     var location = {lat: pin.lat, lng: pin.lng};
     var image = {
-      url: '/images/pins/kitsune_mask.png',
-      size: new google.maps.Size(35, 58),
-      anchor: new google.maps.Point(35 / 2, 58 / 2)
+      url: '/images/pins/' + pin.icon + '.png',
+      size: new google.maps.Size(35, 60),
+      anchor: new google.maps.Point(35 / 2, 60 / 2)
     };
     var marker =  new google.maps.Marker({
       position: location,

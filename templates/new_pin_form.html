@@ -7,14 +7,12 @@
   <div class="form-group">
     <label class="control-label" for="inputPinIcon">Pin Icon</label>
     <br />
-    <div class="pin-input">
-      <input type="radio" name="inputPinIcon" value="1" />
-      <img src="/images/pins/kitsune_mask.png" />
-    </div>
-    <div class="pin-input">
-      <input type="radio" name="inputPinIcon" value="2" />
-      <img src="/images/pins/kitsune_mask.png" />
-    </div>
+    {% for index in range(1, 5) %}
+      <div class="pin-input">
+        <input type="radio" name="inputPinIcon" value="{{ index }}" />
+        <img src="/images/pins/{{ index }}.png" />
+      </div>
+    {% endfor %}
   </div>
   <div class="form-group">
     <label class="control-label" for="inputFavMember">Favorite Member</label>
