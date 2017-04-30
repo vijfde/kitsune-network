@@ -18,7 +18,9 @@ html, body {
   width: 45px !important;
   float: left;
 }
-
+#pinInfoWindowContainer {
+  max-width: 100px;
+}
 #logoImg {
   width: 275px;
   padding-top: 20px;
