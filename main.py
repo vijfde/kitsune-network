@@ -113,11 +113,14 @@ class PinInfoHandler(webapp2.RequestHandler):
             self.response.set_status(404)
             self.response.out.write("")
             return
+        communities = pin.communities.split(',')
+        if len(communities) > 1:
+            communities.remove('0')
         template_values = {
             'pin': pin,
             'fav_song': const_data.songs[str(pin.favorite_song)],
             'fav_member': const_data.members[str(pin.favorite_member)],
-            'communities': [const_data.communities[str(community)] for community in pin.communities.split(',')],
+            'communities': [const_data.communities[community] for community in communities],
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         self.response.write(template.render(template_values))
