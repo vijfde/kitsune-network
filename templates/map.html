@@ -1,3 +1,4 @@
+{% import 'templates/macros.html' as macros %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -37,12 +38,7 @@
     <div id="aboutContent" class="hidden">
       <img id='logoImg' src='/images/logo.png' />
       <br />
-      Join us on Discord:
-      <br />
-      <a class="btn btn-discord btn-block" href="https://discord.gg/QywBrcf">
-        <img src="https://discordapp.com/assets/28174a34e77bb5e5310ced9f95cb480b.png" />
-        JOIN DISCORD SERVER
-      </a>
+      {{ macros.discordbutton() }}
       <p />
       <form>
           <input type="email" class="form-control" id="inputEditEmail" placeholder="Email">
