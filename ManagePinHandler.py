@@ -11,6 +11,9 @@ import json
 from google.appengine.ext import ndb
 from kitsunemap_entities import Pin
 import credentials
+from utilities import is_valid_email
+from utilities import is_real_email
+from utilities import send_email
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -47,7 +50,7 @@ class ManagePinHandler(webapp2.RequestHandler):
         new_pin = Pin()
         new_pin.set_pin_values(self.request.POST, self.request.remote_addr, True)
 
-        send_activate_email(new_pin.email, new_pin.access_uuid)
+        send_email(new_pin.email, new_pin.access_uuid, False)
 
         template_values = { 'action': 'activate' }
         template = JINJA_ENVIRONMENT.get_template('templates/email_sent.html')
@@ -80,60 +83,3 @@ def get_form_error_message(self, request_values, is_new_pin):
         form_error_message = "All fields are required."
 
     return form_error_message
-
-def is_valid_email(email):
-    if not email:
-        return False
-    # purposely removed "+" from regex to ignore alias addresses
-    if re.match(r"^[a-z0-9_.-]+@[a-z0-9-]+\.[a-z0-9-.]+$", email) == None:
-        return False
-    # valid email address, now check if the domain is blacklisted
-    blacklist = open('disposable-email-domains/disposable_email_blacklist.conf')
-    blacklist_content = [line.rstrip() for line in blacklist.readlines()]
-    return not email.split('@')[1] in blacklist_content
-
-def is_real_email(email):
-    http = httplib2.Http()
-    http.add_credentials('api', credentials.MAILGUN_PUB_API_KEY)
-
-    data = { 'address': email }
-    url = 'https://api.mailgun.net/v3/address/validate?' + urllib.urlencode(data)
-    resp, content = http.request(url, 'GET')
-
-    if resp.status != 200:
-        raise RuntimeError(
-            'Mailgun API error: {} {}'.format(resp.status, content))
-
-    response_json = json.loads(content)
-    return response_json["is_valid"]
-
-def send_activate_email(recipient, access_uuid):
-    http = httplib2.Http()
-    http.add_credentials('api', credentials.MAILGUN_API_KEY)
-
-    activation_url = "https://kitsune.network/?activatePin=%s" % access_uuid
-    html_message = """
-        <a href="%s">Click here to activate your pin.</a>
-        <p />
-        Or copy and paste this URL into your browser:
-        <br />
-        %s
-    """ % (activation_url, activation_url)
-
-    domain = 'kitsune.network'
-    url = 'https://api.mailgun.net/v3/%s/messages' % domain
-    data = {
-        'from': 'Kitsune Network <no-reply@%s>' % domain,
-        'to': recipient,
-        'subject': 'Activate your pin',
-        'text': 'Activate your pin by going to the following url: %s' % activation_url,
-        'html': html_message
-    }
-
-    resp, content = http.request(
-        url, 'POST', urllib.urlencode(data),
-        headers={"Content-Type": "application/x-www-form-urlencoded"})
-
-    if resp.status != 200:
-        raise RuntimeError(
-            'Mailgun API error: {} {}'.format(resp.status, content))

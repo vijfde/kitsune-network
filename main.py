@@ -113,41 +113,10 @@ class PinEditRequestHandler(webapp2.RequestHandler):
         if edit_pin and edit_pin.is_activated:
             edit_pin.access_uuid = base64.urlsafe_b64encode(uuid.uuid4().bytes).replace('=', '')
             edit_pin.put()
-            send_edit_email(edit_pin.email, edit_pin.access_uuid)
+            send_email(edit_pin.email, edit_pin.access_uuid, True)
         template_values = { 'action': 'edit' }
         template = JINJA_ENVIRONMENT.get_template('templates/email_sent.html')
         self.response.write(template.render(template_values))
-
-def send_edit_email(recipient, access_uuid):
-    http = httplib2.Http()
-    http.add_credentials('api', credentials.MAILGUN_API_KEY)
-
-    edit_url = "https://kitsune.network/?editPin=%s" % access_uuid
-    html_message = """
-        <a href="%s">Click here to edit your pin.</a>
-        <p />
-        Or copy and paste this URL into your browser:
-        <br />
-        %s
-    """ % (edit_url, edit_url)
-
-    domain = 'kitsune.network'
-    url = 'https://api.mailgun.net/v3/%s/messages' % domain
-    data = {
-        'from': 'Kitsune Network <no-reply@%s>' % domain,
-        'to': recipient,
-        'subject': 'Edit your pin',
-        'text': 'Edit your pin by going to the following url: %s' % edit_url,
-        'html': html_message
-    }
-
-    resp, content = http.request(
-        url, 'POST', urllib.urlencode(data),
-        headers={"Content-Type": "application/x-www-form-urlencoded"})
-
-    if resp.status != 200:
-        raise RuntimeError(
-            'Mailgun API error: {} {}'.format(resp.status, content))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
