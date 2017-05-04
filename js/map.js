@@ -124,7 +124,7 @@ function setupBottomCenterControl(map) {
   controlDiv.appendChild(showAboutUI);
   var showAboutText = document.createElement('div');
   showAboutText.id = 'showAboutText';
-  showAboutText.innerHTML = 'About';
+  showAboutText.innerHTML = 'More';
   showAboutUI.appendChild(showAboutText);
 
   addPinUI.addEventListener('click', function() {
@@ -158,6 +158,16 @@ function setupBottomCenterControl(map) {
 
 }
 
+function setupPinInputRadios() {
+  var pinInputs = document.querySelectorAll(".pin-input");
+  Array.prototype.forEach.call(pinInputs, function(el, i){
+    var pinInput = el.querySelectorAll("img")[0];
+    var pinRadio = el.querySelectorAll("input")[0];
+    pinInput.addEventListener("click", function() {
+      pinRadio.checked = true;
+    });
+  });
+}
 
 function openModalForm() {
   ajax({
@@ -166,14 +176,7 @@ function openModalForm() {
     dataType: 'HTML',
     success: function(html) {
       openModal(html);
-      var pinInputs = document.querySelectorAll(".pin-input");
-      Array.prototype.forEach.call(pinInputs, function(el, i){
-        var pinInput = el.querySelectorAll("img")[0];
-        var pinRadio = el.querySelectorAll("input")[0];
-        pinInput.addEventListener("click", function() {
-          pinRadio.checked = true;
-        });
-      });
+      setupPinInputRadios();
       var inputs = document.querySelectorAll("input, select, textarea");
       Array.prototype.forEach.call(inputs, function(el, i){
         el.addEventListener("input", function () {
@@ -207,17 +210,29 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-function submitNewPinForm() {
+function getFormValue(elementID) {
+  var element = document.getElementById(elementID);
+  if (element != null) {
+    return element.value;
+  } else {
+    return "";
+  }
+}
+
+function getPinFormData() {
   var data = new QueryStringBuilder();
   data.add("name", document.getElementById('inputName').value);
   data.add("about_you", document.getElementById('inputAboutYou').value);
-  data.add("email", document.getElementById('inputEmail').value);
+  data.add("email", getFormValue('inputEmail'));
   data.add("favorite_member", document.getElementById('inputFavMember').value);
   data.add("favorite_song", document.getElementById('inputFavSong').value);
+  data.add("editAccessUUID", getFormValue('editAccessUUIDinput'));
   data.add("communities", getSelectValues(document.getElementById('inputCommunities')));
-  var latlng = newPinMarker.getPosition();
-  data.add("latitude", latlng.lat());
-  data.add("longitude", latlng.lng());
+  if (newPinMarker !== undefined) {
+    var latlng = newPinMarker.getPosition();
+    data.add("latitude", latlng.lat());
+    data.add("longitude", latlng.lng());
+  }
 
   var pinRadios = document.getElementsByName('inputPinIcon');
   for (var i = 0, length = pinRadios.length; i < length; i++) {
@@ -226,7 +241,11 @@ function submitNewPinForm() {
           break;
       }
   }
+  return data;
+}
 
+function submitNewPinForm() {
+  var data = getPinFormData();
   ajax({
     method: 'POST',
     relativeURL: '/pin',
@@ -242,8 +261,44 @@ function submitNewPinForm() {
       formErrorElement.innerHTML = html
     }
   });
+}
+
+function submitEditPinForm() {
+  var data = getPinFormData();
+  ajax({
+    method: 'PUT',
+    relativeURL: '/pin',
+    dataType: 'HTML',
+    data: data,
+    success: function(html) {
+      openModal(html);
+    },
+    error: function(html) {
+      var formErrorElement = document.getElementById("formError");
+      formErrorElement.innerHTML = html
+    }
+  });
+}
+
+function submitEditPinEmail() {
+  var data = new QueryStringBuilder();
+  data.add("email", document.getElementById('inputEditEmail').value);
+
+  ajax({
+    method: 'POST',
+    relativeURL: '/pin/editRequest',
+    dataType: 'HTML',
+    data: data,
+    success: function(html) {
+      openModal(html);
+    },
+    error: function(html) {
+      // There was a connection error of some sort
+    }
+  });
 
 }
+
 
 function getSelectValues(select) {
   var result = [];
@@ -294,7 +349,7 @@ function ajax(settings) {
   showLoadingIndicator();
   var request = new XMLHttpRequest();
   request.open(settings.method, settings.relativeURL, true);
-  if (settings.method == 'POST') {
+  if (settings.method == 'POST' || settings.method == 'PUT') {
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   }
   request.onload = function() {
@@ -315,7 +370,7 @@ function ajax(settings) {
     settings.error("");
     hideLoadingIndicator();
   };
-  if (settings.method == 'POST') {
+  if (settings.method == 'POST' || settings.method == 'PUT') {
     request.send(settings.data.toQueryString());
   } else {
     request.send();

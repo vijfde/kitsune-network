@@ -5,6 +5,7 @@ members = {
     '3': 'YUIMETAL',
     '0': 'They are all my favorite',
 }
+members_display_sort = ['0', '1', '2', '3']
 songs = {
     "0": "They are all my favorite",
     "1": "Doki Doki ☆ Morning".decode('utf8'),
@@ -34,9 +35,11 @@ songs = {
     "25": "Sis. Anger",
     "26": "Tales of The Destinies"
 }
+songs_display_sort = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26']
 communities = {
     "0": "None",
     "1": "THE ONE",
     "2": "/r/BABYMETAL",
     "3": "/r/BABYMETAL_japan"
 }
+communities_display_sort = ['0', '1', '2', '3']

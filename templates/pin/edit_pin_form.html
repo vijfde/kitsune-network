@@ -1,0 +1,19 @@
+{% extends 'templates/pin/pin_form.html' %}
+{% block title %}Edit Your Pin{% endblock %}
+{% block extra_form_inputs %}
+<input type="hidden" id="editAccessUUIDinput" value="{{ edit_pin_uuid }}" />
+<script>
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+ready(function() {
+  setupPinInputRadios();  
+});
+</script>
+{% endblock %}
+{% block submit_button_title %}Save{% endblock %}
+{% block submit_button_function %}submitEditPinForm{% endblock %}

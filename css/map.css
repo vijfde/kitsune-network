@@ -24,6 +24,8 @@ html, body {
 #logoImg {
   width: 300px;
   padding-top: 20px;
+  margin: 0 auto 0 auto;
+  display: block;
 }
 #loadingImage {
     position: absolute;

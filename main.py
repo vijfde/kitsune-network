@@ -7,9 +7,11 @@ import jinja2
 import json
 import httplib2
 import urllib
+import base64
+import uuid
 
 from kitsunemap_entities import Pin
-from create_pin import CreatePinHandler
+from ManagePinHandler import ManagePinHandler
 import const_data
 import credentials
 
@@ -30,9 +32,27 @@ class MainHandler(webapp2.RequestHandler):
         if activate_pin_uuid != None and activate_pin(activate_pin_uuid):
             show_modal_onload = True
             template_values["show_pin_activated_message"] = True
+        edit_pin_uuid = self.request.GET.get('editPin')
+        if edit_pin_uuid != None:
+            edit_pin = get_edit_pin(edit_pin_uuid)
+            if edit_pin != None:
+                show_modal_onload = True
+                template_values["edit_pin_uuid"] = edit_pin_uuid
+                template_values["pin"] = edit_pin
+                template_values["pin_communities"] = [int(x) for x in edit_pin.communities.split(',')]
+                add_const_data(template_values)
+                template_values["show_pin_edit_form"] = True
         template_values["show_modal_onload"] = show_modal_onload
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         self.response.write(template.render(template_values))
+
+def add_const_data(template_values):
+    template_values["songs_dict"] = const_data.songs
+    template_values["songs_display_sort"] = const_data.songs_display_sort
+    template_values["members_dict"] = const_data.members
+    template_values["members_display_sort"] = const_data.members_display_sort
+    template_values["communities_dict"] = const_data.communities
+    template_values["communities_display_sort"] = const_data.communities_display_sort
 
 def activate_pin(activate_pin_uuid):
     ''' Activate a pin, returns if the activation was a success '''
@@ -48,6 +68,10 @@ def activate_pin(activate_pin_uuid):
     #     target = 'worker',
     #     params = { 'pin_id': pin.key.id() })
     return True
+
+def get_edit_pin(edit_pin_uuid):
+    pin = Pin.query(Pin.access_uuid == edit_pin_uuid).get()
+    return pin
 
 def send_discord_web_hook(pin):
     pin_details = 'Title: ' + pin.name
@@ -75,7 +99,14 @@ class PinsHandler(webapp2.RequestHandler):
             pins_dict.append(pin_dict)
         self.response.out.write(json.dumps(pins_dict))
 
-class PinHandler(webapp2.RequestHandler):
+class NewPinFormHandler(webapp2.RequestHandler):
+    def get(self):
+        template_values = {}
+        add_const_data(template_values)
+        template = JINJA_ENVIRONMENT.get_template('templates/pin/new_pin_form.html')
+        self.response.write(template.render(template_values))
+
+class PinInfoHandler(webapp2.RequestHandler):
     def get(self, pin_id):
         pin = Pin.get_by_id(int(pin_id))
         if pin == None:
@@ -91,15 +122,54 @@ class PinHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         self.response.write(template.render(template_values))
 
-class NewPinFormHandler(webapp2.RequestHandler):
-    def get(self):
-        template = JINJA_ENVIRONMENT.get_template('templates/new_pin_form.html')
-        self.response.write(template.render())
+class PinEditRequestHandler(webapp2.RequestHandler):
+    def post(self):
+        email = self.request.POST.get('email')
+        edit_pin = Pin.query(Pin.email == email).get()
+        if edit_pin and edit_pin.is_activated:
+            edit_pin.access_uuid = base64.urlsafe_b64encode(uuid.uuid4().bytes).replace('=', '')
+            edit_pin.put()
+            send_edit_email(edit_pin.email, edit_pin.access_uuid)
+        template_values = { 'action': 'edit' }
+        template = JINJA_ENVIRONMENT.get_template('templates/email_sent.html')
+        self.response.write(template.render(template_values))
+
+def send_edit_email(recipient, access_uuid):
+    http = httplib2.Http()
+    http.add_credentials('api', credentials.MAILGUN_API_KEY)
+
+    edit_url = "https://kitsune.network/?editPin=%s" % access_uuid
+    html_message = """
+        <a href="%s">Click here to edit your pin.</a>
+        <p />
+        Or copy and paste this URL into your browser:
+        <br />
+        %s
+    """ % (edit_url, edit_url)
+
+    domain = 'kitsune.network'
+    url = 'https://api.mailgun.net/v3/%s/messages' % domain
+    data = {
+        'from': 'Kitsune Network <no-reply@%s>' % domain,
+        'to': recipient,
+        'subject': 'Edit your pin',
+        'text': 'Edit your pin by going to the following url: %s' % edit_url,
+        'html': html_message
+    }
+
+    resp, content = http.request(
+        url, 'POST', urllib.urlencode(data),
+        headers={"Content-Type": "application/x-www-form-urlencoded"})
+
+    if resp.status != 200:
+        raise RuntimeError(
+            'Mailgun API error: {} {}'.format(resp.status, content))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/pin', CreatePinHandler),
-    ('/pin/(.*)', PinHandler),
+    ('/pin', ManagePinHandler),
+    ('/pin/editRequest', PinEditRequestHandler),
+    ('/pin/(.*)', PinInfoHandler),
     ('/pins', PinsHandler),
     ('/new_pin_form.html', NewPinFormHandler),
 ], debug=True)

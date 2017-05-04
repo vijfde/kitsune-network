@@ -22,6 +22,8 @@
             <br />
             <button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">Close</button>
           </div>
+        {% elif show_pin_edit_form %}
+          {% include 'templates/pin/edit_pin_form.html' %}
         {% endif %}
       </div>
     </div>
@@ -33,8 +35,7 @@
       <button class="btn btn-primary btn-block" onclick="openModalForm()">Yes</button>
     </div>
     <div id="aboutContent" class="hidden">
-      <h1>About</h1>
-      Not affiliated with BABYMETAL
+      <img id='logoImg' src='/images/logo.png' />
       <br />
       Join us on Discord:
       <br />
@@ -42,6 +43,15 @@
         <img src="https://discordapp.com/assets/28174a34e77bb5e5310ced9f95cb480b.png" />
         JOIN DISCORD SERVER
       </a>
+      <p />
+      <form>
+          <input type="email" class="form-control" id="inputEditEmail" placeholder="Email">
+          <button type="submit" class="btn btn-primary" onclick="submitEditPinEmail(); return false;">Edit Pin</button>
+      </form>
+
+      <p /><br />
+
+      Not affiliated with BABYMETAL
       <button type="button" class="btn btn-primary btn-block" onclick="closeModal(); return false;">Close</button>
     </div>
     <img id="loadingImage" src="/images/loading.png" />
