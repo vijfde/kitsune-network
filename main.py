@@ -54,17 +54,6 @@ def add_const_data(template_values):
     template_values["communities_dict"] = const_data.communities
     template_values["communities_display_sort"] = const_data.communities_display_sort
 
-def send_discord_web_hook(pin):
-    pin_details = 'Title: ' + pin.name
-    pin_details += '\nFav Song: ' + const_data.songs[str(pin.favorite_song)]
-    pin_details += '\nFav Member: ' + const_data.members[str(pin.favorite_member)]
-    pin_details += '\nCommunities: ' + ', '.join([const_data.communities[str(community)] for community in pin.communities.split(',')])
-    pin_details += '\nAbout: \n' + pin.about_you
-    content = """**New Pin Activated!**```%s```""" % pin_details
-    task = taskqueue.add(
-        url = '/tasks/send_discord_web_hook',
-        params = { 'message': content })
-
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
         # bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())

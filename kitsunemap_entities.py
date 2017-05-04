@@ -1,4 +1,6 @@
 from google.appengine.ext import ndb
+import const_data
+from google.appengine.api import taskqueue
 
 class Pin(ndb.Model):
     #use entity key for acticvation
@@ -15,6 +17,17 @@ class Pin(ndb.Model):
     favorite_member = ndb.IntegerProperty(required=True)
     favorite_song = ndb.IntegerProperty(required=True)
     communities = ndb.StringProperty(required=True)
+
+    def send_discord_web_hook(self):
+        pin_details = 'Title: ' + self.name
+        pin_details += '\nFav Song: ' + const_data.songs[str(self.favorite_song)]
+        pin_details += '\nFav Member: ' + const_data.members[str(self.favorite_member)]
+        pin_details += '\nCommunities: ' + ', '.join([const_data.communities[str(community)] for community in self.communities.split(',')])
+        pin_details += '\nAbout: \n' + self.about_you
+        content = """**New Pin Activated!**```%s```""" % pin_details
+        task = taskqueue.add(
+            url = '/tasks/send_discord_web_hook',
+            params = { 'message': content })
 
     @classmethod
     def validate_pin_values(cls, request_values, is_new_pin):
@@ -74,7 +87,7 @@ class Pin(ndb.Model):
         pin.is_activated = True
         pin.access_uuid = ""
         pin.put()
-        send_discord_web_hook(pin)
+        pin.send_discord_web_hook()
         # task = taskqueue.add(
         #     url = '/update_pins_json',
         #     target = 'worker',
