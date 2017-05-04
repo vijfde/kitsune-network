@@ -11,7 +11,7 @@ import base64
 import uuid
 
 from kitsunemap_entities import Pin
-import const_data
+import constants
 import credentials
 
 import cloudstorage as gcs
@@ -39,19 +39,19 @@ class MainHandler(webapp2.RequestHandler):
                 template_values["edit_pin_uuid"] = edit_pin_uuid
                 template_values["pin"] = edit_pin
                 template_values["pin_communities"] = [int(x) for x in edit_pin.communities.split(',')]
-                add_const_data(template_values)
+                add_constants(template_values)
                 template_values["show_pin_edit_form"] = True
         template_values["show_modal_onload"] = show_modal_onload
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         self.response.write(template.render(template_values))
 
-def add_const_data(template_values):
-    template_values["songs_dict"] = const_data.songs
-    template_values["songs_display_sort"] = const_data.songs_display_sort
-    template_values["members_dict"] = const_data.members
-    template_values["members_display_sort"] = const_data.members_display_sort
-    template_values["communities_dict"] = const_data.communities
-    template_values["communities_display_sort"] = const_data.communities_display_sort
+def add_constants(template_values):
+    template_values["songs_dict"] = constants.songs
+    template_values["songs_display_sort"] = constants.songs_display_sort
+    template_values["members_dict"] = constants.members
+    template_values["members_display_sort"] = constants.members_display_sort
+    template_values["communities_dict"] = constants.communities
+    template_values["communities_display_sort"] = constants.communities_display_sort
 
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
@@ -71,7 +71,7 @@ class PinsHandler(webapp2.RequestHandler):
 class NewPinFormHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {}
-        add_const_data(template_values)
+        add_constants(template_values)
         template = JINJA_ENVIRONMENT.get_template('templates/pin/new_pin_form.html')
         self.response.write(template.render(template_values))
 
@@ -87,9 +87,9 @@ class PinInfoHandler(webapp2.RequestHandler):
             communities.remove('0')
         template_values = {
             'pin': pin,
-            'fav_song': const_data.songs[str(pin.favorite_song)],
-            'fav_member': const_data.members[str(pin.favorite_member)],
-            'communities': [const_data.communities[community] for community in communities],
+            'fav_song': constants.songs[str(pin.favorite_song)],
+            'fav_member': constants.members[str(pin.favorite_member)],
+            'communities': [constants.communities[community] for community in communities],
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         self.response.write(template.render(template_values))
