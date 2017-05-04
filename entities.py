@@ -5,6 +5,7 @@ from google.appengine.ext import ndb
 from google.appengine.api import taskqueue
 
 import constants
+from utilities import is_valid_email, is_real_email
 
 class Pin(ndb.Model):
     created_datetime = ndb.DateTimeProperty(auto_now_add=True,indexed=True,required=True)

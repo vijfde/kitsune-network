@@ -6,6 +6,7 @@ import base64
 import uuid
 
 from entities import Pin
+from utilities import send_email
 import constants
 
 JINJA_ENVIRONMENT = jinja2.Environment(
