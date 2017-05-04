@@ -29,12 +29,12 @@ class MainHandler(webapp2.RequestHandler):
         template_values = {}
         show_modal_onload = False
         activate_pin_uuid = self.request.GET.get('activatePin')
-        if activate_pin_uuid != None and activate_pin(activate_pin_uuid):
+        if activate_pin_uuid != None and Pin.activate_pin(activate_pin_uuid):
             show_modal_onload = True
             template_values["show_pin_activated_message"] = True
         edit_pin_uuid = self.request.GET.get('editPin')
         if edit_pin_uuid != None:
-            edit_pin = get_edit_pin(edit_pin_uuid)
+            edit_pin = Pin.get_edit_pin(edit_pin_uuid)
             if edit_pin != None:
                 show_modal_onload = True
                 template_values["edit_pin_uuid"] = edit_pin_uuid
@@ -53,25 +53,6 @@ def add_const_data(template_values):
     template_values["members_display_sort"] = const_data.members_display_sort
     template_values["communities_dict"] = const_data.communities
     template_values["communities_display_sort"] = const_data.communities_display_sort
-
-def activate_pin(activate_pin_uuid):
-    ''' Activate a pin, returns if the activation was a success '''
-    pin = Pin.query(Pin.access_uuid == activate_pin_uuid).get()
-    if not pin:
-        return False
-    pin.is_activated = True
-    pin.access_uuid = ""
-    pin.put()
-    send_discord_web_hook(pin)
-    # task = taskqueue.add(
-    #     url = '/update_pins_json',
-    #     target = 'worker',
-    #     params = { 'pin_id': pin.key.id() })
-    return True
-
-def get_edit_pin(edit_pin_uuid):
-    pin = Pin.query(Pin.access_uuid == edit_pin_uuid).get()
-    return pin
 
 def send_discord_web_hook(pin):
     pin_details = 'Title: ' + pin.name

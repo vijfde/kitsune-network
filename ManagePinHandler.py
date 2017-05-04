@@ -32,7 +32,7 @@ class ManagePinHandler(webapp2.RequestHandler):
             self.response.out.write(form_error_message)
             return
 
-        set_pin_values(self, pin, self.request.POST, False)
+        pin.set_pin_values(self.request.POST, self.request.remote_addr, False)
 
         template = JINJA_ENVIRONMENT.get_template('templates/pin_updated.html')
         self.response.write(template.render())
@@ -45,7 +45,7 @@ class ManagePinHandler(webapp2.RequestHandler):
             return
 
         new_pin = Pin()
-        set_pin_values(self, new_pin, self.request.POST, True)
+        new_pin.set_pin_values(self.request.POST, self.request.remote_addr, True)
 
         send_activate_email(new_pin.email, new_pin.access_uuid)
 
@@ -80,24 +80,6 @@ def get_form_error_message(self, request_values, is_new_pin):
         form_error_message = "All fields are required."
 
     return form_error_message
-
-def set_pin_values(self, pin, request_values, is_new_pin):
-    pin.name = request_values.get('name').strip()
-    pin.about_you = request_values.get('about_you').strip()
-    pin.pin_icon = int(request_values.get('pin_icon'))
-    pin.favorite_member = int(request_values.get('favorite_member'))
-    pin.favorite_song = int(request_values.get('favorite_song'))
-    pin.communities = request_values.get('communities')
-    pin.user_ip_address = self.request.remote_addr
-    if is_new_pin:
-        pin.access_uuid = base64.urlsafe_b64encode(uuid.uuid4().bytes).replace('=', '')
-        pin.email = request_values.get('email').strip()
-        latitude = request_values.get('latitude')
-        longitude = request_values.get('longitude')
-        pin.point = ndb.GeoPt(latitude, longitude)
-    else:
-        pin.access_uuid = ""
-    pin.put()
 
 def is_valid_email(email):
     if not email:
