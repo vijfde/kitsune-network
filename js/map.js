@@ -82,7 +82,10 @@ function setupMarkers(json) {
   });
   // https://github.com/googlemaps/v3-utility-library/blob/master/markerclusterer/src/markerclusterer.js
   var markerCluster = new MarkerClusterer(map, markers,
-      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      {
+        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+        minimumClusterSize: 10 
+      });
 }
 
 function showPinInfoWindow(pin, marker) {
