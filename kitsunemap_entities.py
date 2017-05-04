@@ -16,7 +16,38 @@ class Pin(ndb.Model):
     favorite_song = ndb.IntegerProperty(required=True)
     communities = ndb.StringProperty(required=True)
 
+    @classmethod
+    def validate_pin_values(cls, request_values, is_new_pin):
+        form_error_message = None
+        try:
+            name = request_values.get('name').strip()
+            about_you = request_values.get('about_you').strip()
+            if is_new_pin:
+                email = request_values.get('email').strip()
+                latitude = request_values.get('latitude')
+                longitude = request_values.get('longitude')
+                geo_point = ndb.GeoPt(latitude, longitude)
+            pin_icon = int(request_values.get('pin_icon'))
+            favorite_member = int(request_values.get('favorite_member'))
+            favorite_song = int(request_values.get('favorite_song'))
+            communities = request_values.get('communities')
+             # this will raise an error if the communities string is invalid
+            [int(x) for x in communities.split(',')]
+
+            if not name or not about_you or (is_new_pin and not email):
+                form_error_message = "All fields are required."
+            elif is_new_pin and (not is_valid_email(email) or not is_real_email(email)):
+                form_error_message = "A valid email address is required."
+            elif is_new_pin and Pin.query(Pin.email == email).get():
+                form_error_message = "A pin already exists for this email address."
+        except:
+            form_error_message = "All fields are required."
+
+        return form_error_message
+
     def set_pin_values(self, request_values, remote_addr, is_new_pin):
+        if not Pin.validate_pin_values(request_values, is_new_pin):
+            return
         self.name = request_values.get('name').strip()
         self.about_you = request_values.get('about_you').strip()
         self.pin_icon = int(request_values.get('pin_icon'))
@@ -35,7 +66,7 @@ class Pin(ndb.Model):
         self.put()
 
     @classmethod
-    def activate_pin(activate_pin_uuid):
+    def activate_pin(cls, activate_pin_uuid):
         ''' Activate a pin, returns if the activation was a success '''
         pin = Pin.query(Pin.access_uuid == activate_pin_uuid).get()
         if not pin:
@@ -51,6 +82,6 @@ class Pin(ndb.Model):
         return True
 
     @classmethod
-    def get_edit_pin(edit_pin_uuid):
+    def get_edit_pin(cls, edit_pin_uuid):
         pin = Pin.query(Pin.access_uuid == edit_pin_uuid).get()
         return pin
