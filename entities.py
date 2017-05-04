@@ -1,6 +1,10 @@
+import base64
+import uuid
+
 from google.appengine.ext import ndb
-import constants
 from google.appengine.api import taskqueue
+
+import constants
 
 class Pin(ndb.Model):
     #use entity key for acticvation

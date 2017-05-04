@@ -1,22 +1,15 @@
-#!/usr/bin/env python
-import logging
-
 import webapp2
 import os
 import jinja2
 import json
-import httplib2
-import urllib
 import base64
 import uuid
 
 from entities import Pin
 import constants
-import credentials
 
-import cloudstorage as gcs
-from google.appengine.api import app_identity
-from google.appengine.api import taskqueue
+# import cloudstorage as gcs
+# from google.appengine.api import app_identity
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
