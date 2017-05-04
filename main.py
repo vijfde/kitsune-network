@@ -24,7 +24,7 @@ class MainHandler(webapp2.RequestHandler):
             template_values["show_pin_activated_message"] = True
         edit_pin_uuid = self.request.GET.get('editPin')
         if edit_pin_uuid != None:
-            edit_pin = Pin.get_edit_pin(edit_pin_uuid)
+            edit_pin = Pin.query(Pin.access_uuid == edit_pin_uuid).get()
             if edit_pin != None:
                 show_modal_onload = True
                 template_values["edit_pin_uuid"] = edit_pin_uuid

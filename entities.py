@@ -93,8 +93,3 @@ class Pin(ndb.Model):
         pin.put()
         pin.send_discord_web_hook()
         return True
-
-    @classmethod
-    def get_edit_pin(cls, edit_pin_uuid):
-        pin = Pin.query(Pin.access_uuid == edit_pin_uuid).get()
-        return pin
