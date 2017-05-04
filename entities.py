@@ -7,7 +7,6 @@ from google.appengine.api import taskqueue
 import constants
 
 class Pin(ndb.Model):
-    #use entity key for acticvation
     created_datetime = ndb.DateTimeProperty(auto_now_add=True,indexed=True,required=True)
     email = ndb.StringProperty(required=True)
     user_ip_address = ndb.StringProperty(required=True)
@@ -92,10 +91,6 @@ class Pin(ndb.Model):
         pin.access_uuid = ""
         pin.put()
         pin.send_discord_web_hook()
-        # task = taskqueue.add(
-        #     url = '/update_pins_json',
-        #     target = 'worker',
-        #     params = { 'pin_id': pin.key.id() })
         return True
 
     @classmethod

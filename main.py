@@ -8,9 +8,6 @@ import uuid
 from entities import Pin
 import constants
 
-# import cloudstorage as gcs
-# from google.appengine.api import app_identity
-
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -48,9 +45,6 @@ def add_constants(template_values):
 
 class PinsHandler(webapp2.RequestHandler):
     def get(self):
-        # bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
-        # with gcs.open('/' + bucket_name + '/pins.json') as cloudstorage_file:
-        #     pins = cloudstorage_file.read()
         pins_dict = []
         for pin in Pin.query(Pin.is_activated == True).fetch():
             pin_dict = {}
