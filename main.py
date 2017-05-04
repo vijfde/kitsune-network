@@ -10,7 +10,7 @@ import urllib
 import base64
 import uuid
 
-from kitsunemap_entities import Pin
+from entities import Pin
 import constants
 import credentials
 

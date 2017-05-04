@@ -4,7 +4,6 @@ import urllib
 import webapp2
 
 import credentials
-from kitsunemap_entities import Pin
 
 class UpdatePinsJsonHandler(webapp2.RequestHandler):
     def post(self):
