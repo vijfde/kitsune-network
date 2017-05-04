@@ -63,7 +63,7 @@ class Pin(ndb.Model):
         return form_error_message
 
     def set_pin_values(self, request_values, remote_addr, is_new_pin):
-        if not Pin.validate_pin_values(request_values, is_new_pin):
+        if Pin.validate_pin_values(request_values, is_new_pin):
             return
         self.name = request_values.get('name').strip()
         self.about_you = request_values.get('about_you').strip()
