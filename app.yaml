@@ -17,6 +17,7 @@ handlers:
   static_dir: css
 - url: /images
   static_dir: images
+  expiration: 1h
 
 - url: /tasks/.*
   script: worker.app
