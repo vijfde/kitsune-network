@@ -64,7 +64,7 @@ function initMap() {
 }
 
 function setupMarkers(json) {
-  var markers = json.map(function(pin, i) {
+  json.forEach(function(pin) {
     var location = {lat: pin.lat, lng: pin.lng};
     var image = {
       url: '/images/pins/' + pin.icon + '.png',
@@ -74,18 +74,12 @@ function setupMarkers(json) {
     var marker =  new google.maps.Marker({
       position: location,
       icon: image,
+      map: map,
     });
     marker.addListener('click', function() {
       showPinInfoWindow(pin, marker);
     });
-    return marker;
   });
-  // https://github.com/googlemaps/v3-utility-library/blob/master/markerclusterer/src/markerclusterer.js
-  var markerCluster = new MarkerClusterer(map, markers,
-      {
-        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-        minimumClusterSize: 10 
-      });
 }
 
 function showPinInfoWindow(pin, marker) {
