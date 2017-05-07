@@ -9,25 +9,50 @@ html, body {
 
 .btn-discord {
   background-color: #7289DA;
+}
+.btn-img {
   display: inline-block !important;
   color: #fff !important;
   font-family: sans-serif;
   font-size: 26px !important;
   font-weight: 100 !important;
 }
-.btn-discord img {
+.btn-img img {
   height: 45px;
   width: 45px !important;
   float: left;
+}
+#editPinForm {
+  margin: 10px 0 10px 0;
+  display: inline-block;
+  width: 100%;
+}
+#editPinForm input, #editPinForm button {
+  width: 49%;
+  display: inline-block;
+}
+#editPinForm input {
+  float: left;
+}
+#editPinForm button {
+  float: right;
+  min-width: 75px;
+}
+#aboutMessage {
+  line-height: 30px;
+}
+#aboutMessage span {
+  font-size: 8px;
 }
 #pinInfoWindowContainer {
   max-width: 250px;
 }
 #logoImg {
-  width: 300px;
+  max-width: 300px;
   padding-top: 20px;
   margin: 0 auto 0 auto;
   display: block;
+  width: 100%;
 }
 #loadingImage {
     position: absolute;

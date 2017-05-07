@@ -41,16 +41,23 @@
     <div id="aboutContent" class="hidden">
       <img id='logoImg' src='/images/logo.png' />
       <br />
+      <p id="aboutMessage">
+        Welcome to Kitsue Network! This website is dedicated to plotting all of the fans of the band BABYMETAL around the world.
+        If you do not know who BABYMETAL are then watch <a target="_blank" href="https://www.youtube.com/watch?v=WIKqgE4BwAY">this video</a>.
+        If you are a kitsune (fan of the band) please feel free to add your location on the map!
+        Please join us on Discord if you have any feature suggestions for the site. We are always open to new suggestions.
+        This website is open source too! If you'd like to contribute, please join us on Discord :)
+        <span>Not affiliated with BABYMETAL</span>
+      </p>
       {{ macros.discordbutton() }}
-      <p />
-      <form>
+      <form id="editPinForm">
+          <span>
+            If you would like to edit your pin just enter your email in the box below.
+          </span>
+          <br />
           <input type="email" class="form-control" id="inputEditEmail" placeholder="Email">
           <button type="submit" class="btn btn-primary" onclick="submitEditPinEmail(); return false;">Edit Pin</button>
       </form>
-
-      <p /><br />
-
-      Not affiliated with BABYMETAL
       <button type="button" class="btn btn-primary btn-block" onclick="closeModal(); return false;">Close</button>
     </div>
     <img id="loadingImage" src="/images/spinner.png" />
