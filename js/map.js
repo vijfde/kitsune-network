@@ -113,7 +113,8 @@ function setupBottomCenterControl(map) {
   controlDiv.appendChild(addPinUI);
   var addPinText = document.createElement('div');
   addPinText.id = 'addPinText';
-  addPinText.innerHTML = 'Add Pin';
+  var addPinTextLabel = document.getElementById('addPinTextLabel');
+  addPinText.innerHTML = addPinTextLabel.innerHTML;
   addPinUI.appendChild(addPinText);
 
   var showAboutUI = document.createElement('div');
@@ -121,7 +122,8 @@ function setupBottomCenterControl(map) {
   controlDiv.appendChild(showAboutUI);
   var showAboutText = document.createElement('div');
   showAboutText.id = 'showAboutText';
-  showAboutText.innerHTML = 'More';
+  var showAboutTextLabel = document.getElementById('showAboutTextLabel');
+  showAboutText.innerHTML = showAboutTextLabel.innerHTML;
   showAboutUI.appendChild(showAboutText);
 
   addPinUI.addEventListener('click', function() {

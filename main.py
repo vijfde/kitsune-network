@@ -9,9 +9,11 @@ from entities import Pin
 from utilities import send_email
 import constants
 
+from babel.support import Translations
+
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
-    extensions=['jinja2.ext.autoescape'],
+    extensions=['jinja2.ext.autoescape', 'jinja2.ext.i18n'],
     autoescape=True)
 
 class MainHandler(webapp2.RequestHandler):
@@ -34,7 +36,15 @@ class MainHandler(webapp2.RequestHandler):
                 template_values["show_pin_edit_form"] = True
         template_values["show_modal_onload"] = show_modal_onload
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
+        setup_i18n(self.request)
         self.response.write(template.render(template_values))
+
+def setup_i18n(request):
+    header = request.headers.get('Accept-Language', '')  # e.g. en-gb,en;q=0.8,es-es;q=0.5,eu;q=0.3
+    list_of_desired_locales = [locale.split(';')[0] for locale in header.split(',')]
+    locale_dir = "locales"
+    translations = Translations.load(locale_dir, list_of_desired_locales)
+    JINJA_ENVIRONMENT.install_gettext_translations(translations)
 
 def add_constants(template_values):
     template_values["songs_dict"] = constants.songs
