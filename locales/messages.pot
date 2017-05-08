@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-07 20:24-0400\n"
+"POT-Creation-Date: 2017-05-07 20:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,34 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
-
-#: lib/httplib2/__init__.py:436
-#, python-format
-msgid "Content purported to be compressed with %s but failed to decompress."
-msgstr ""
-
-#: lib/httplib2/__init__.py:546
-#, python-format
-msgid "Unsupported value for qop: %s."
-msgstr ""
-
-#: lib/httplib2/__init__.py:549 lib/httplib2/__init__.py:611
-#, python-format
-msgid "Unsupported value for algorithm: %s.algorithm"
-msgstr ""
-
-#: lib/httplib2/__init__.py:608
-msgid "The challenge doesn't contain a server nonce, or this one is empty."
-msgstr ""
-
-#: lib/httplib2/__init__.py:614
-#, python-format
-msgid "Unsupported value for pw-algorithm: %s.pw-algorithm"
-msgstr ""
-
-#: lib/httplib2/__init__.py:1422
-msgid "Redirected but the response is missing a Location: header."
-msgstr ""
 
 #: templates/map.html:24 templates/pin/pin_form.html:70
 #: templates/pin_updated.html:7

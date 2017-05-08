@@ -1,6 +1,8 @@
 # pybabel extract -o locales/messages.pot -F main.mapping .
 # pybabel update -l ja -d locales -i locales/messages.pot
 
+[ignore: lib/**]
+
 # Extraction from Python source files
 [python: **.py]
 # Extraction from jinja2 templates
