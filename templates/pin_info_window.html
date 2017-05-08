@@ -1,16 +1,16 @@
 <div id="pinInfoWindowContainer">
   <h4>{{ pin.name }}</h4>
-  <b>Favorite Song:</b> {{ fav_song }}<br />
-  <b>Favorite Member:</b> {{ fav_member }}<br />
+  <b>{{ _("Favorite Song") }}:</b> {{ fav_song }}<br />
+  <b>{{ _("Favorite Member") }}:</b> {{ fav_member }}<br />
   {% if communities|length > 1 %}
-    <b>Communities:</b> <br />
+    <b>{{ _("Communities") }}:</b> <br />
     {% for community in communities %}
       {{ community }}<br />
     {% endfor %}
   {% else %}
-    <b>Community:</b> {{ communities[0] }}<br />
+    <b>{{ _("Community") }}:</b> {{ communities[0] }}<br />
   {% endif %}
-  <b>About Me:</b><br />
+  <b>{{ _("About Me") }}:</b><br />
   {% for line in pin.about_you.splitlines() %}
       {{line}}<br />
   {% endfor %}

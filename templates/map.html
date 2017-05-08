@@ -21,7 +21,7 @@
             <h1>Pin Activated!</h1>
             <img id="yui_high_five" src="/images/yui_high_five.gif" />
             <br />
-            <button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">Close</button>
+            <button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">{{ _("Close") }}</button>
           </div>
         {% elif show_pin_edit_form %}
           {% include 'templates/pin/edit_pin_form.html' %}
@@ -35,7 +35,7 @@
         You can drag it into place.
       </p>
       <p>
-        <button class="btn btn-primary btn-block" onclick="openModalForm()">Continue</button>
+        <button class="btn btn-primary btn-block" onclick="openModalForm()">{{ _("Continue") }}</button>
       </p>
     </div>
     <div id="aboutContent" class="hidden">

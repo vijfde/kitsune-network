@@ -11,9 +11,9 @@ function ready(fn) {
   }
 }
 ready(function() {
-  setupPinInputRadios();  
+  setupPinInputRadios();
 });
 </script>
 {% endblock %}
-{% block submit_button_title %}Save{% endblock %}
+{% block submit_button_title %}{{ _("Save") }}{% endblock %}
 {% block submit_button_function %}submitEditPinForm{% endblock %}

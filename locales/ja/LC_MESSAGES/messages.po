@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-07 20:02-0400\n"
-"PO-Revision-Date: 2017-05-07 20:02-0400\n"
+"POT-Creation-Date: 2017-05-07 20:24-0400\n"
+"PO-Revision-Date: 2017-05-07 20:30-0400\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -47,6 +47,15 @@ msgstr ""
 msgid "Redirected but the response is missing a Location: header."
 msgstr ""
 
+#: templates/map.html:24 templates/pin/pin_form.html:70
+#: templates/pin_updated.html:7
+msgid "Close"
+msgstr "閉じる"
+
+#: templates/map.html:38
+msgid "Continue"
+msgstr "続行"
+
 #: templates/map.html:65
 msgid "More"
 msgstr "より多い"
@@ -54,6 +63,58 @@ msgstr "より多い"
 #: templates/map.html:66
 msgid "Add Pin"
 msgstr "追加"
+
+#: templates/pin/pin_form.html:35 templates/pin_info_window.html:3
+msgid "Favorite Song"
+msgstr "お気に入りの曲"
+
+#: templates/pin/pin_form.html:22 templates/pin_info_window.html:4
+msgid "Favorite Member"
+msgstr "お気に入りのメンバー"
+
+#: templates/pin_info_window.html:6
+msgid "Communities"
+msgstr "コミュニティ"
+
+#: templates/pin/pin_form.html:48 templates/pin_info_window.html:11
+msgid "Community"
+msgstr "コミュニティ"
+
+#: templates/pin_info_window.html:13
+msgid "About Me"
+msgstr "私について"
+
+#: templates/pin/edit_pin_form.html:18
+msgid "Save"
+msgstr "セーブ"
+
+#: templates/pin/new_pin_form.html:5
+msgid "Email Address"
+msgstr "電子メールアドレス"
+
+#: templates/pin/new_pin_form.html:10
+msgid "Send Activation Email"
+msgstr "アクティベーション電子メールを送信"
+
+#: templates/pin/pin_form.html:4
+msgid "Name"
+msgstr "名"
+
+#: templates/pin/pin_form.html:8
+msgid "Icon"
+msgstr ""
+
+#: templates/pin/pin_form.html:24 templates/pin/pin_form.html:37
+msgid "Select One"
+msgstr "一つ選択してください"
+
+#: templates/pin/pin_form.html:50
+msgid "Select At Least One"
+msgstr "少なくとも1つを選択"
+
+#: templates/pin/pin_form.html:61
+msgid "About You"
+msgstr "あなたについて"
 
 #~ msgid "For sale"
 #~ msgstr "test 1"

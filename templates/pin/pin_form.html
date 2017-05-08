@@ -1,11 +1,11 @@
 <h1>{% block title %}{% endblock %}</h1>
 <form>
   <div class="form-group">
-    <label class="control-label" for="inputName">Name</label>
+    <label class="control-label" for="inputName">{{ _("Name") }}</label>
     <input class="form-control" id="inputName" value="{{ pin.name if pin is defined else "" }}">
   </div>
   <div class="form-group">
-    <label class="control-label" for="inputPinIcon">Pin Icon</label>
+    <label class="control-label" for="inputPinIcon">{{ _("Icon") }}</label>
     <br />
     {% for index in range(1, 5) %}
       <div class="pin-input">
@@ -19,9 +19,9 @@
     {% endfor %}
   </div>
   <div class="form-group">
-    <label class="control-label" for="inputFavMember">Favorite Member</label>
+    <label class="control-label" for="inputFavMember">{{ _("Favorite Member") }}</label>
     <select class="form-control" id="inputFavMember">
-      <option value="" selected disabled>Select One</option>
+      <option value="" selected disabled>{{ _("Select One") }}</option>
       {% for member_id in members_display_sort %}
         {% if pin is defined and member_id|int == pin.favorite_member %}
           <option value="{{ member_id }}" selected >{{ members_dict[member_id] }}</option>
@@ -32,9 +32,9 @@
     </select>
   </div>
   <div class="form-group">
-    <label class="control-label" for="inputFavSong">Favorite Song</label>
+    <label class="control-label" for="inputFavSong">{{ _("Favorite Song") }}</label>
     <select class="form-control" id="inputFavSong">
-      <option value="" selected disabled>Select One</option>
+      <option value="" selected disabled>{{ _("Select One") }}</option>
       {% for song_id in songs_display_sort %}
         {% if pin is defined and song_id|int == pin.favorite_song %}
           <option value="{{ song_id }}" selected >{{ songs_dict[song_id] }}</option>
@@ -45,9 +45,9 @@
     </select>
   </div>
   <div class="form-group">
-    <label class="control-label" for="inputCommunities">Community</label>
+    <label class="control-label" for="inputCommunities">{{ _("Community") }}</label>
     <select multiple="" class="form-control" id="inputCommunities" aria-describedby="communityHelp">
-      <option value="" disabled>Select At Least One</option>
+      <option value="" disabled>{{ _("Select At Least One") }}</option>
       {% for community_id in communities_display_sort %}
         {% if pin is defined and community_id|int in pin_communities %}
           <option value="{{ community_id }}" selected >{{ communities_dict[community_id] }}</option>
@@ -58,7 +58,7 @@
     </select>
   </div>
   <div class="form-group">
-    <label class="control-label" for="inputAboutYou">About You</label>
+    <label class="control-label" for="inputAboutYou">{{ _("About You") }}</label>
     <textarea class="form-control" id="inputAboutYou" rows="3" aria-describedby="aboutYouHelp">{{ pin.about_you if pin is defined else "" }}</textarea>
     <small id="aboutYouHelp" class="form-text text-muted">Tell everyone your BABYMETAL story?</small>
   </div>
@@ -67,5 +67,5 @@
   <button type="button" class="btn btn-primary" onclick="{% block submit_button_function %}{% endblock %}(); return false;">
     {% block submit_button_title %}{% endblock %}
   </button>
-  <button type="button" class="btn btn-default" onclick="closeModal(); return false;">Close</button>
+  <button type="button" class="btn btn-default" onclick="closeModal(); return false;">{{ _("Close") }}</button>
 </form>

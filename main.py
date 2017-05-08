@@ -71,6 +71,7 @@ class NewPinFormHandler(webapp2.RequestHandler):
         template_values = {}
         add_constants(template_values)
         template = JINJA_ENVIRONMENT.get_template('templates/pin/new_pin_form.html')
+        setup_i18n(self.request)
         self.response.write(template.render(template_values))
 
 class PinInfoHandler(webapp2.RequestHandler):
@@ -90,6 +91,7 @@ class PinInfoHandler(webapp2.RequestHandler):
             'communities': [constants.communities[community] for community in communities],
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
+        setup_i18n(self.request)
         self.response.write(template.render(template_values))
 
 class PinEditRequestHandler(webapp2.RequestHandler):
@@ -102,6 +104,7 @@ class PinEditRequestHandler(webapp2.RequestHandler):
             send_email(edit_pin.email, edit_pin.access_uuid, True)
         template_values = { 'action': 'edit' }
         template = JINJA_ENVIRONMENT.get_template('templates/email_sent.html')
+        setup_i18n(self.request)
         self.response.write(template.render(template_values))
 
 class ManagePinHandler(webapp2.RequestHandler):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-07 20:02-0400\n"
+"POT-Creation-Date: 2017-05-07 20:24-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,11 +45,72 @@ msgstr ""
 msgid "Redirected but the response is missing a Location: header."
 msgstr ""
 
+#: templates/map.html:24 templates/pin/pin_form.html:70
+#: templates/pin_updated.html:7
+msgid "Close"
+msgstr ""
+
+#: templates/map.html:38
+msgid "Continue"
+msgstr ""
+
 #: templates/map.html:65
 msgid "More"
 msgstr ""
 
 #: templates/map.html:66
 msgid "Add Pin"
+msgstr ""
+
+#: templates/pin/pin_form.html:35 templates/pin_info_window.html:3
+msgid "Favorite Song"
+msgstr ""
+
+#: templates/pin/pin_form.html:22 templates/pin_info_window.html:4
+msgid "Favorite Member"
+msgstr ""
+
+#: templates/pin_info_window.html:6
+msgid "Communities"
+msgstr ""
+
+#: templates/pin/pin_form.html:48 templates/pin_info_window.html:11
+msgid "Community"
+msgstr ""
+
+#: templates/pin_info_window.html:13
+msgid "About Me"
+msgstr ""
+
+#: templates/pin/edit_pin_form.html:18
+msgid "Save"
+msgstr ""
+
+#: templates/pin/new_pin_form.html:5
+msgid "Email Address"
+msgstr ""
+
+#: templates/pin/new_pin_form.html:10
+msgid "Send Activation Email"
+msgstr ""
+
+#: templates/pin/pin_form.html:4
+msgid "Name"
+msgstr ""
+
+#: templates/pin/pin_form.html:8
+msgid "Icon"
+msgstr ""
+
+#: templates/pin/pin_form.html:24 templates/pin/pin_form.html:37
+msgid "Select One"
+msgstr ""
+
+#: templates/pin/pin_form.html:50
+msgid "Select At Least One"
+msgstr ""
+
+#: templates/pin/pin_form.html:61
+msgid "About You"
 msgstr ""
 
