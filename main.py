@@ -10,6 +10,7 @@ from utilities import send_email
 import constants
 
 from babel.support import Translations
+from google.appengine.api import taskqueue
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -101,7 +102,9 @@ class PinEditRequestHandler(webapp2.RequestHandler):
         if edit_pin and edit_pin.is_activated:
             edit_pin.access_uuid = base64.urlsafe_b64encode(uuid.uuid4().bytes).replace('=', '')
             edit_pin.put()
-            send_email(edit_pin.email, edit_pin.access_uuid, True)
+            task = taskqueue.add(
+                url = '/tasks/send_edit_email',
+                params = { 'email': edit_pin.email, 'access_uuid': edit_pin.access_uuid })
         template_values = { 'action': 'edit' }
         template = JINJA_ENVIRONMENT.get_template('templates/email_sent.html')
         setup_i18n(self.request)
