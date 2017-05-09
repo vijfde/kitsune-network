@@ -73,6 +73,7 @@ class PinsHandler(webapp2.RequestHandler):
             pin_dict["lat"] = pin.point.lat
             pin_dict["lng"] = pin.point.lon
             pins_dict.append(pin_dict)
+        self.response.headers["cache-control"] = "max-age=600"
         self.response.out.write(json.dumps(pins_dict))
 
 class NewPinFormHandler(webapp2.RequestHandler):
@@ -101,6 +102,7 @@ class PinInfoHandler(webapp2.RequestHandler):
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         setup_i18n(self.request)
+        self.response.headers["cache-control"] = "max-age=600"
         self.response.write(template.render(template_values))
 
 class PinEditRequestHandler(webapp2.RequestHandler):
@@ -159,6 +161,6 @@ app = webapp2.WSGIApplication([
     ('/pin', ManagePinHandler),
     ('/pin/editRequest', PinEditRequestHandler),
     ('/pin/(.*)', PinInfoHandler),
-    ('/pins', PinsHandler),
+    ('/pins.json', PinsHandler),
     ('/new_pin_form.html', NewPinFormHandler),
 ], debug=True)

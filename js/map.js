@@ -36,7 +36,7 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP].push(logoDiv);
 
   // get and setup markers
-  var url = '/pins';
+  var url = '/pins.json';
   if (document.getElementById('shouldForceRefreshPins')) {
     url += '?forceRefresh=True';
   }
