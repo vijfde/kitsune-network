@@ -52,10 +52,10 @@
       {{ macros.discordbutton() }}
       <form id="editPinForm">
           <span>
-            If you would like to edit your pin just enter your email in the box below.
+            {{ _("To edit your pin, enter your email below.") }}
           </span>
           <br />
-          <input type="email" class="form-control" id="inputEditEmail" placeholder="Email">
+          <input type="email" class="form-control" id="inputEditEmail" placeholder="{{ _("Email") }}">
           <button type="submit" class="btn btn-primary" onclick="submitEditPinEmail(); return false;">{{ _("Edit Pin") }}</button>
       </form>
       <button type="button" class="btn btn-primary btn-block" onclick="closeModal(); return false;">{{ _("Close") }}</button>

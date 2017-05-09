@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-08 22:23-0400\n"
-"PO-Revision-Date: 2017-05-08 22:31-0400\n"
+"POT-Creation-Date: 2017-05-08 22:35-0400\n"
+"PO-Revision-Date: 2017-05-08 22:36-0400\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgid "If it does not appear within 10 minutes, check your spam folder."
 msgstr "10分以内に表示されない場合は、迷惑メールフォルダを確認してください"
 
 #: templates/email_sent.html:13 templates/map.html:24 templates/map.html:61
-#: templates/pin/pin_form.html:73 templates/pin_updated.html:7
+#: templates/pin/pin_form.html:72 templates/pin_updated.html:7
 msgid "Close"
 msgstr "閉じる"
 
@@ -55,6 +55,14 @@ msgstr "ピンをドラッグして修正することができます"
 #: templates/map.html:38
 msgid "Continue"
 msgstr "続行"
+
+#: templates/map.html:55
+msgid "To edit your pin, enter your email below."
+msgstr "ピンを編集するには、下にメールアドレスを入力してください"
+
+#: templates/map.html:58
+msgid "Email"
+msgstr "Eメール"
 
 #: templates/map.html:59
 msgid "Edit Pin"

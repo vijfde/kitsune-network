@@ -63,7 +63,6 @@
   <div class="form-group">
     <label class="control-label" for="inputAboutYou">{{ _("About You") }}</label>
     <textarea class="form-control" id="inputAboutYou" rows="3" aria-describedby="aboutYouHelp">{{ pin.about_you if pin is defined else "" }}</textarea>
-    <small id="aboutYouHelp" class="form-text text-muted">Tell everyone your BABYMETAL story?</small>
   </div>
   {% block extra_form_inputs %}{% endblock %}
   <div id="formError" class="form-group bg-warning"></div>
