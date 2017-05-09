@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 members = {
+    '0': "They are all my favorite",
     '1': 'スーメタル / SU-METAL / Queen Su / Goddess'.decode('utf8'),
     '2': 'モアメタル / MOAMETAL / Angel of Love'.decode('utf8'),
     '3': 'ユイメタル / YUIMETAL / Angel of Dance'.decode('utf8'),
 }
 members_display_sort = ['1', '2', '3']
 songs = {
+    "0": "They are all my favorite",
     "1": "Doki Doki ☆ Morning / ド・キ・ド・キ☆モーニング".decode('utf8'),
     "2": "Ijime Dame Zettai / イジメ、ダメ、ゼッタイ".decode('utf8'),
     "3": "Akatsuki / 紅月-アカツキ-".decode('utf8'),
@@ -35,6 +37,7 @@ songs = {
 }
 songs_display_sort = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26']
 communities = {
+    "0": "None",
     "1": "THE ONE",
     "2": "/r/BABYMETAL",
     "3": "/r/BABYMETAL_japan"
