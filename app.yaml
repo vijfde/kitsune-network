@@ -4,9 +4,6 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
-# TODO: delete this
-default_expiration: 0s
-
 handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
@@ -17,7 +14,6 @@ handlers:
   static_dir: css
 - url: /images
   static_dir: images
-  expiration: 1h
 
 - url: /tasks/.*
   script: worker.app
