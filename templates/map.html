@@ -62,6 +62,9 @@
     </div>
     <img id="loadingImage" src="/images/spinner.png" />
     <div class="hidden">
+      {% if force_refresh_pins %}
+        <label id="shouldForceRefreshPins">True</label>
+      {% endif %}
       <label id="showAboutTextLabel">{{ _("More") }}</label>
       <label id="addPinTextLabel">{{ _("Add Pin") }}</label>
     </div>

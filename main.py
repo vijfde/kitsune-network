@@ -26,6 +26,7 @@ class MainHandler(webapp2.RequestHandler):
             if Pin.activate_pin(activate_pin_uuid):
                 show_modal_onload = True
                 template_values["show_pin_activated_message"] = True
+                template_values["force_refresh_pins"] = True
             else:
                 self.redirect('/')
                 return

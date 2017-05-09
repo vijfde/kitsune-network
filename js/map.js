@@ -36,9 +36,13 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP].push(logoDiv);
 
   // get and setup markers
+  var url = '/pins';
+  if (document.getElementById('shouldForceRefreshPins')) {
+    url += '?forceRefresh=True';
+  }
   ajax({
     method: 'GET',
-    relativeURL: '/pins',
+    relativeURL: url,
     dataType: 'JSON',
     success: setupMarkers,
     error: function() {
