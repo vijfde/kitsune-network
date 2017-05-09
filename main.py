@@ -22,9 +22,13 @@ class MainHandler(webapp2.RequestHandler):
         template_values = {}
         show_modal_onload = False
         activate_pin_uuid = self.request.GET.get('activatePin')
-        if activate_pin_uuid != None and Pin.activate_pin(activate_pin_uuid):
-            show_modal_onload = True
-            template_values["show_pin_activated_message"] = True
+        if activate_pin_uuid != None:
+            if Pin.activate_pin(activate_pin_uuid):
+                show_modal_onload = True
+                template_values["show_pin_activated_message"] = True
+            else:
+                self.redirect('/')
+                return
         edit_pin_uuid = self.request.GET.get('editPin')
         if edit_pin_uuid != None:
             edit_pin = Pin.query(Pin.access_uuid == edit_pin_uuid).get()
@@ -35,6 +39,9 @@ class MainHandler(webapp2.RequestHandler):
                 template_values["pin_communities"] = [int(x) for x in edit_pin.communities.split(',')]
                 add_constants(template_values)
                 template_values["show_pin_edit_form"] = True
+            else:
+                self.redirect('/')
+                return
         template_values["show_modal_onload"] = show_modal_onload
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         setup_i18n(self.request)
