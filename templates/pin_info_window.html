@@ -1,7 +1,7 @@
 <div id="pinInfoWindowContainer">
   <h4>{{ pin.name }}</h4>
-  <b>{{ _("Favorite Song") }}:</b> {{ _(fav_song) }}<br />
   <b>{{ _("Favorite Member") }}:</b> {{ _(fav_member) }}<br />
+  <b>{{ _("Favorite Song") }}:</b> {{ _(fav_song) }}<br />
   {% if communities|length > 1 %}
     <b>{{ _("Communities") }}:</b> <br />
     {% for community in communities %}
