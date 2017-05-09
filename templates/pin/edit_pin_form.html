@@ -1,5 +1,5 @@
 {% extends 'templates/pin/pin_form.html' %}
-{% block title %}Edit Your Pin{% endblock %}
+{% block title %}{{ _("Edit Your Pin") }}{% endblock %}
 {% block extra_form_inputs %}
 <input type="hidden" id="editAccessUUIDinput" value="{{ edit_pin_uuid }}" />
 <script>

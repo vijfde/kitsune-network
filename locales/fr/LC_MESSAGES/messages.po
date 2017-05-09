@@ -1,4 +1,4 @@
-# Translations template for PROJECT.
+# French translations for PROJECT.
 # Copyright (C) 2017 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
@@ -7,26 +7,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-08 13:52-0400\n"
+"POT-Creation-Date: 2017-05-08 22:23-0400\n"
 "PO-Revision-Date: 2017-05-08 22:14+0200\n"
+"Last-Translator: \n"
+"Language: fr\n"
 "Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
-"X-Generator: Poedit 2.0.1\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
 
-#: templates/map.html:24 templates/pin/pin_form.html:70
-#: templates/pin_updated.html:7
+#: templates/email_sent.html:2
+msgid "Email Sent"
+msgstr ""
+
+#: templates/email_sent.html:5
+msgid "An email has been sent to you."
+msgstr ""
+
+#: templates/email_sent.html:7
+msgid "It may take a few minutes to appear."
+msgstr ""
+
+#: templates/email_sent.html:9
+msgid "If it does not appear within 10 minutes, check your spam folder."
+msgstr ""
+
+#: templates/email_sent.html:13 templates/map.html:24 templates/map.html:61
+#: templates/pin/pin_form.html:73 templates/pin_updated.html:7
 msgid "Close"
 msgstr "Fermer"
+
+#: templates/map.html:21
+msgid "Pin Activated"
+msgstr ""
+
+#: templates/map.html:34
+msgid "Is the marker in the correct place?"
+msgstr ""
+
+#: templates/map.html:35
+msgid "You can drag the pin to make corrections."
+msgstr ""
 
 #: templates/map.html:38
 msgid "Continue"
 msgstr "Continuer"
+
+#: templates/map.html:59
+msgid "Edit Pin"
+msgstr ""
 
 #: templates/map.html:65
 msgid "More"
@@ -36,7 +67,7 @@ msgstr "En savoir plus"
 msgid "Add Pin"
 msgstr "Ajouter une broche"
 
-#: templates/pin/pin_form.html:35 templates/pin_info_window.html:3
+#: templates/pin/pin_form.html:36 templates/pin_info_window.html:3
 msgid "Favorite Song"
 msgstr "Chanson préférée"
 
@@ -48,7 +79,7 @@ msgstr "Membre préféré"
 msgid "Communities"
 msgstr "Communautés"
 
-#: templates/pin/pin_form.html:48 templates/pin_info_window.html:11
+#: templates/pin/pin_form.html:50 templates/pin_info_window.html:11
 msgid "Community"
 msgstr "Communauté"
 
@@ -56,13 +87,33 @@ msgstr "Communauté"
 msgid "About Me"
 msgstr "À propos de moi"
 
+#: templates/pin_updated.html:1
+msgid "Pin Updated"
+msgstr ""
+
+#: templates/pin_updated.html:4
+msgid "Your pin has been updated."
+msgstr ""
+
+#: templates/pin/edit_pin_form.html:2
+msgid "Edit Your Pin"
+msgstr ""
+
 #: templates/pin/edit_pin_form.html:18
 msgid "Save"
 msgstr "Sauvegarder"
 
+#: templates/pin/new_pin_form.html:2
+msgid "Create A New Pin"
+msgstr ""
+
 #: templates/pin/new_pin_form.html:5
 msgid "Email Address"
 msgstr "Adresse e-mail"
+
+#: templates/pin/new_pin_form.html:7
+msgid "We'll never share your email with anyone else."
+msgstr ""
 
 #: templates/pin/new_pin_form.html:10
 msgid "Send Activation Email"
@@ -76,14 +127,23 @@ msgstr "Nom"
 msgid "Icon"
 msgstr "Icône"
 
-#: templates/pin/pin_form.html:24 templates/pin/pin_form.html:37
+#: templates/pin/pin_form.html:24 templates/pin/pin_form.html:38
 msgid "Select One"
 msgstr "Choisissez-en un"
 
-#: templates/pin/pin_form.html:50
+#: templates/pin/pin_form.html:25 templates/pin/pin_form.html:39
+msgid "They are all my favorite"
+msgstr ""
+
+#: templates/pin/pin_form.html:52
 msgid "Select At Least One"
 msgstr "Choisissez-en au moins un"
 
-#: templates/pin/pin_form.html:61
+#: templates/pin/pin_form.html:53
+msgid "None"
+msgstr ""
+
+#: templates/pin/pin_form.html:64
 msgid "About You"
 msgstr "À propos de toi"
+

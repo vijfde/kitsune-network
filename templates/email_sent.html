@@ -1,13 +1,13 @@
 {% import 'templates/macros.html' as macros %}
-<h1>Email Sent</h1>
+<h1>{{ _("Email Sent") }}</h1>
 <div style="text-align:center">
   <p /><br />
-  An Email has been sent for you to {{ action }} your pin.
+  {{ _("An email has been sent to you.") }}
   <p /><br />
-  It may take a few minutes to appear.
+  {{ _("It may take a few minutes to appear.") }}
   <br />
-  If it does not appear within 10 minutes, check your spam folder.
+  {{ _("If it does not appear within 10 minutes, check your spam folder.") }}
   <p /><br />
   {{ macros.discordbutton() }}
 </div>
-<button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">Close</button>
+<button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">{{ _("Close") }}</button>
