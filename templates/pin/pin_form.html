@@ -22,6 +22,7 @@
     <label class="control-label" for="inputFavMember">{{ _("Favorite Member") }}</label>
     <select class="form-control" id="inputFavMember">
       <option value="" selected disabled>{{ _("Select One") }}</option>
+      <option value="0" selected >{{ _("They are all my favorite") }}</option>
       {% for member_id in members_display_sort %}
         {% if pin is defined and member_id|int == pin.favorite_member %}
           <option value="{{ member_id }}" selected >{{ members_dict[member_id] }}</option>
@@ -35,6 +36,7 @@
     <label class="control-label" for="inputFavSong">{{ _("Favorite Song") }}</label>
     <select class="form-control" id="inputFavSong">
       <option value="" selected disabled>{{ _("Select One") }}</option>
+      <option value="0" selected >{{ _("They are all my favorite") }}</option>
       {% for song_id in songs_display_sort %}
         {% if pin is defined and song_id|int == pin.favorite_song %}
           <option value="{{ song_id }}" selected >{{ songs_dict[song_id] }}</option>
@@ -48,6 +50,7 @@
     <label class="control-label" for="inputCommunities">{{ _("Community") }}</label>
     <select multiple="" class="form-control" id="inputCommunities" aria-describedby="communityHelp">
       <option value="" disabled>{{ _("Select At Least One") }}</option>
+      <option value="0" selected >{{ _("None") }}</option>
       {% for community_id in communities_display_sort %}
         {% if pin is defined and community_id|int in pin_communities %}
           <option value="{{ community_id }}" selected >{{ communities_dict[community_id] }}</option>
