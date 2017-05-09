@@ -5,7 +5,7 @@
     <title>Kitsune Network</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link href="css/map.css" rel="stylesheet">
+    <link href="css/map.css?v=0.9" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
@@ -19,7 +19,7 @@
         {% if show_pin_activated_message %}
           <div id="pinActivatedMessage">
             <h1>{{ _("Pin Activated") }}!</h1>
-            <img id="yui_high_five" src="/images/yui_high_five.gif" />
+            <img id="yui_high_five" src="/images/yui_high_five.gif?v=1.0" />
             <br />
             <button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">{{ _("Close") }}</button>
           </div>
@@ -60,7 +60,7 @@
       </form>
       <button type="button" class="btn btn-primary btn-block" onclick="closeModal(); return false;">{{ _("Close") }}</button>
     </div>
-    <img id="loadingImage" src="/images/spinner.png" />
+    <img id="loadingImage" src="/images/spinner.png?v=1.0" />
     <div class="hidden">
       {% if force_refresh_pins %}
         <label id="shouldForceRefreshPins">True</label>
@@ -68,7 +68,7 @@
       <label id="showAboutTextLabel">{{ _("More") }}</label>
       <label id="addPinTextLabel">{{ _("Add Pin") }}</label>
     </div>
-    <script src="js/map.js"></script>
+    <script src="js/map.js?v=0.9"></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer
