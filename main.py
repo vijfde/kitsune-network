@@ -48,11 +48,15 @@ class MainHandler(webapp2.RequestHandler):
         setup_i18n(self.request)
         self.response.write(template.render(template_values))
 
-def setup_i18n(request):
+def get_translations(request):
     header = request.headers.get('Accept-Language', '')  # e.g. en-gb,en;q=0.8,es-es;q=0.5,eu;q=0.3
     list_of_desired_locales = [locale.split(';')[0] for locale in header.split(',')]
     locale_dir = "locales"
     translations = Translations.load(locale_dir, list_of_desired_locales)
+    return translations
+
+def setup_i18n(request):
+    translations = get_translations(request)
     JINJA_ENVIRONMENT.install_gettext_translations(translations)
 
 def add_constants(template_values):
@@ -129,7 +133,8 @@ class ManagePinHandler(webapp2.RequestHandler):
             self.response.out.write("")
             return
 
-        form_error_message = Pin.validate_pin_values(self.request.POST, False)
+        translations = get_translations(self.request)
+        form_error_message = Pin.validate_pin_values(self.request.POST, False, translations)
         if form_error_message:
             self.response.set_status(400)
             self.response.out.write(form_error_message)
@@ -138,10 +143,12 @@ class ManagePinHandler(webapp2.RequestHandler):
         pin.set_pin_values(self.request.POST, self.request.remote_addr, False)
 
         template = JINJA_ENVIRONMENT.get_template('templates/pin_updated.html')
+        setup_i18n(self.request)
         self.response.write(template.render())
 
     def post(self):
-        form_error_message = Pin.validate_pin_values(self.request.POST, True)
+        translations = get_translations(self.request)
+        form_error_message = Pin.validate_pin_values(self.request.POST, True, translations)
         if form_error_message:
             self.response.set_status(400)
             self.response.out.write(form_error_message)
@@ -154,6 +161,7 @@ class ManagePinHandler(webapp2.RequestHandler):
 
         template_values = { 'action': 'activate' }
         template = JINJA_ENVIRONMENT.get_template('templates/email_sent.html')
+        setup_i18n(self.request)
         self.response.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([

@@ -34,7 +34,7 @@ class Pin(ndb.Model):
             params = { 'message': content })
 
     @classmethod
-    def validate_pin_values(cls, request_values, is_new_pin):
+    def validate_pin_values(cls, request_values, is_new_pin, translations):
         form_error_message = None
         try:
             name = request_values.get('name').strip()
@@ -52,13 +52,13 @@ class Pin(ndb.Model):
             [int(x) for x in communities.split(',')]
 
             if not name or not about_you or (is_new_pin and not email):
-                form_error_message = "All fields are required."
+                form_error_message = translations.gettext("All fields are required.")
             elif is_new_pin and (not is_valid_email(email) or not is_real_email(email) or is_spam_email(email)):
-                form_error_message = "A valid email address is required."
+                form_error_message = translations.gettext("A valid email address is required.")
             elif is_new_pin and Pin.query(Pin.email == email).get():
-                form_error_message = "A pin already exists for this email address."
+                form_error_message = translations.gettext("A pin already exists for this email address.")
         except:
-            form_error_message = "All fields are required."
+            form_error_message = translations.gettext("All fields are required.")
 
         return form_error_message
 

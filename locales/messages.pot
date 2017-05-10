@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-08 22:35-0400\n"
+"POT-Creation-Date: 2017-05-10 16:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
+
+#: entities.py:55 entities.py:61
+msgid "All fields are required."
+msgstr ""
+
+#: entities.py:57
+msgid "A valid email address is required."
+msgstr ""
+
+#: entities.py:59
+msgid "A pin already exists for this email address."
+msgstr ""
 
 #: templates/email_sent.html:2
 msgid "Email Sent"
@@ -33,7 +45,7 @@ msgstr ""
 msgid "If it does not appear within 10 minutes, check your spam folder."
 msgstr ""
 
-#: templates/email_sent.html:13 templates/map.html:24 templates/map.html:61
+#: templates/email_sent.html:13 templates/map.html:24 templates/map.html:62
 #: templates/pin/pin_form.html:72 templates/pin_updated.html:7
 msgid "Close"
 msgstr ""
@@ -54,43 +66,47 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: templates/map.html:55
+#: templates/map.html:52
+msgid "Help translate Kitsune Network"
+msgstr ""
+
+#: templates/map.html:56
 msgid "To edit your pin, enter your email below."
 msgstr ""
 
-#: templates/map.html:58
+#: templates/map.html:59
 msgid "Email"
 msgstr ""
 
-#: templates/map.html:59
+#: templates/map.html:60
 msgid "Edit Pin"
 msgstr ""
 
-#: templates/map.html:65
+#: templates/map.html:69
 msgid "More"
 msgstr ""
 
-#: templates/map.html:66
+#: templates/map.html:70
 msgid "Add Pin"
 msgstr ""
 
-#: templates/pin/pin_form.html:36 templates/pin_info_window.html:3
-msgid "Favorite Song"
-msgstr ""
-
-#: templates/pin/pin_form.html:22 templates/pin_info_window.html:4
+#: templates/pin/pin_form.html:22 templates/pin_info_window.html:3
 msgid "Favorite Member"
 msgstr ""
 
-#: templates/pin_info_window.html:6
+#: templates/pin/pin_form.html:36 templates/pin_info_window.html:5
+msgid "Favorite Song"
+msgstr ""
+
+#: templates/pin_info_window.html:8
 msgid "Communities"
 msgstr ""
 
-#: templates/pin/pin_form.html:50 templates/pin_info_window.html:11
+#: templates/pin/pin_form.html:50 templates/pin_info_window.html:15
 msgid "Community"
 msgstr ""
 
-#: templates/pin_info_window.html:13
+#: templates/pin_info_window.html:18
 msgid "About Me"
 msgstr ""
 
