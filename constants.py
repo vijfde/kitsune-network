@@ -40,6 +40,7 @@ communities = {
     "0": "None",
     "1": "THE ONE",
     "2": "/r/BABYMETAL",
-    "3": "/r/BABYMETAL_japan"
+    "3": "/r/BABYMETAL_japan",
+    "4": "vk.com/babymetal",
 }
-communities_display_sort = ['1', '2', '3']
+communities_display_sort = ['1', '2', '3', '4']
