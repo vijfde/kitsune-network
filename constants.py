@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 members = {
     '0': "They are all my favorite",
-    '1': 'スーメタル / SU-METAL / Queen Su / Goddess'.decode('utf8'),
+    '1': 'スーメタル / SU-METAL / Queen Su'.decode('utf8'),
     '2': 'モアメタル / MOAMETAL / Angel of Love'.decode('utf8'),
     '3': 'ユイメタル / YUIMETAL / Angel of Dance'.decode('utf8'),
 }
