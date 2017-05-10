@@ -47,6 +47,14 @@ html, body {
 #pinInfoWindowContainer {
   max-width: 250px;
 }
+#pinInfoWindowContainer span, #pinInfoWindowContainer p {
+  display: block;
+}
+#pinInfoWindowContainer span {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
 #logoImg {
   max-width: 300px;
   padding-top: 20px;
