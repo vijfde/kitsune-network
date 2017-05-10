@@ -11,10 +11,7 @@ def is_valid_email(email):
     # purposely removed "+" from regex to ignore alias addresses
     if re.match(r"^[a-z0-9_.-]+@[a-z0-9-]+\.[a-z0-9-.]+$", email) == None:
         return False
-    # valid email address, now check if the domain is blacklisted
-    blacklist = open('disposable-email-domains/disposable_email_blacklist.conf')
-    blacklist_content = [line.rstrip() for line in blacklist.readlines()]
-    return not email.split('@')[1] in blacklist_content
+    return True
 
 def is_real_email(email):
     http = httplib2.Http()
@@ -30,6 +27,21 @@ def is_real_email(email):
 
     response_json = json.loads(content)
     return response_json["is_valid"]
+
+def is_spam_email(email):
+    http = httplib2.Http()
+    url = "http://api.antideo.com/email/" + email
+    resp, content = http.request(url, 'GET')
+    response_json = json.loads(content)
+    if not response_json["free_provider"]:
+        return True
+    if response_json["spam"]:
+        return True
+    if response_json["scam"]:
+        return True
+    if response_json["disposable"]:
+        return True
+    return False
 
 def send_email(recipient, access_uuid, is_edit):
     http = httplib2.Http()

@@ -5,7 +5,7 @@ from google.appengine.ext import ndb
 from google.appengine.api import taskqueue
 
 import constants
-from utilities import is_valid_email, is_real_email
+from utilities import is_valid_email, is_real_email, is_spam_email
 
 class Pin(ndb.Model):
     created_datetime = ndb.DateTimeProperty(auto_now_add=True,indexed=True,required=True)
@@ -53,7 +53,7 @@ class Pin(ndb.Model):
 
             if not name or not about_you or (is_new_pin and not email):
                 form_error_message = "All fields are required."
-            elif is_new_pin and (not is_valid_email(email) or not is_real_email(email)):
+            elif is_new_pin and (not is_valid_email(email) or not is_real_email(email) or is_spam_email(email)):
                 form_error_message = "A valid email address is required."
             elif is_new_pin and Pin.query(Pin.email == email).get():
                 form_error_message = "A pin already exists for this email address."
