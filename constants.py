@@ -33,9 +33,16 @@ songs = {
     "23": "From Dusk Till Dawn",
     "24": "GJ!",
     "25": "Sis. Anger",
-    "26": "Tales of The Destinies"
+    "26": "Tales of The Destinies",
+    "27": "Kimi to Anime Ga Mitai / 君とアニメが見たい".decode('utf8'),
+    "28": "White Love",
+    "29": "Over the future",
+    "30": "Tsubasa wo kudasai",
+    "31": "Chokotto Love",
+    "32": "Love Machine",
+    "33": "Soul's Refrain",
 }
-songs_display_sort = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26']
+songs_display_sort = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33']
 communities = {
     "0": "None",
     "1": "THE ONE",
