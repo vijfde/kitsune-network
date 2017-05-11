@@ -140,7 +140,7 @@ class ManagePinHandler(webapp2.RequestHandler):
             self.response.out.write(form_error_message)
             return
 
-        pin.set_pin_values(self.request.POST, self.request.remote_addr, False)
+        pin.set_pin_values(self.request.POST, self.request.remote_addr, False, translations)
 
         template = JINJA_ENVIRONMENT.get_template('templates/pin_updated.html')
         setup_i18n(self.request)
@@ -155,7 +155,7 @@ class ManagePinHandler(webapp2.RequestHandler):
             return
 
         new_pin = Pin()
-        new_pin.set_pin_values(self.request.POST, self.request.remote_addr, True)
+        new_pin.set_pin_values(self.request.POST, self.request.remote_addr, True, translations)
 
         send_email(new_pin.email, new_pin.access_uuid, False)
 
