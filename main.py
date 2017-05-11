@@ -96,7 +96,7 @@ class PinInfoHandler(webapp2.RequestHandler):
             self.response.out.write("")
             return
         communities = pin.communities.split(',')
-        if len(communities) > 1:
+        if len(communities) > 1 and '0' in communities:
             communities.remove('0')
         template_values = {
             'pin': pin,
