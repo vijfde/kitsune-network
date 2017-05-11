@@ -107,7 +107,7 @@ class PinInfoHandler(webapp2.RequestHandler):
         }
         template = JINJA_ENVIRONMENT.get_template('templates/pin_info_window.html')
         setup_i18n(self.request)
-        self.response.headers["cache-control"] = "max-age=600"
+        # self.response.headers["cache-control"] = "max-age=600"
         self.response.write(template.render(template_values))
 
 class PinEditRequestHandler(webapp2.RequestHandler):
