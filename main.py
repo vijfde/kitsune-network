@@ -78,7 +78,7 @@ class PinsHandler(webapp2.RequestHandler):
             pin_dict["lat"] = pin.point.lat
             pin_dict["lng"] = pin.point.lon
             pins_dict.append(pin_dict)
-        self.response.headers["cache-control"] = "max-age=600"
+        # self.response.headers["cache-control"] = "max-age=600"
         self.response.out.write(json.dumps(pins_dict))
 
 class NewPinFormHandler(webapp2.RequestHandler):
