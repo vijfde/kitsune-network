@@ -26,7 +26,10 @@ class Pin(ndb.Model):
         pin_details = 'Title: ' + self.name
         pin_details += '\nFav Song: ' + constants.songs[str(self.favorite_song)]
         pin_details += '\nFav Member: ' + constants.members[str(self.favorite_member)]
-        pin_details += '\nCommunities: ' + ', '.join([constants.communities[str(community)] for community in self.communities.split(',')])
+        communities = self.communities.split(',')
+        if len(communities) > 1 and '0' in communities:
+            communities.remove('0')
+        pin_details += '\nCommunities: ' + ', '.join([constants.communities[str(community)] for community in communities])
         pin_details += '\nAbout: \n' + self.about_you
         content = """**New Pin Activated!**```%s```""" % pin_details
         task = taskqueue.add(
