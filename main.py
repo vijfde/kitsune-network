@@ -51,7 +51,8 @@ class MainHandler(webapp2.RequestHandler):
 def get_translations(request):
     header = request.headers.get('Accept-Language', '')  # e.g. en-gb,en;q=0.8,es-es;q=0.5,eu;q=0.3
     list_of_desired_locales = [locale.split(';')[0] for locale in header.split(',')]
-    list_of_desired_locales = "en"
+    if "en" in list_of_desired_locales:
+        list_of_desired_locales = None
     locale_dir = "locales"
     translations = Translations.load(locale_dir, list_of_desired_locales)
     return translations
