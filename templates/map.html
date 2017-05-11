@@ -19,7 +19,7 @@
         {% if show_pin_activated_message %}
           <div id="pinActivatedMessage">
             <h1>{{ _("Pin Activated") }}!</h1>
-            <img id="yui_high_five" src="/images/yui_high_five.gif?v=1.0" />
+            <img id="yui_high_five" src="/images/yui_high_five.gif" />
             <br />
             <button type="button" class="btn btn-success btn-block" onclick="closeModal(); return false;">{{ _("Close") }}</button>
           </div>
@@ -61,7 +61,7 @@
       </form>
       <button type="button" class="btn btn-primary btn-block" onclick="closeModal(); return false;">{{ _("Close") }}</button>
     </div>
-    <img id="loadingImage" src="/images/spinner.png?v=1.0.beta" />
+    <img id="loadingImage" src="/images/spinner.png" />
     <div class="hidden">
       {% if force_refresh_pins %}
         <label id="shouldForceRefreshPins">True</label>
