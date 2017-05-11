@@ -87,6 +87,9 @@ html, body {
 #newPinMessage {
   display: none;
 }
+#newPinMessageContainer {
+  max-width: 260px;
+}
 #modal {
   height: 100%;
   width: 100%;

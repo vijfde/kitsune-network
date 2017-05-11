@@ -5,7 +5,7 @@
     <title>BETA - Kitsune Network</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link href="css/map.css?v=1.0.beta" rel="stylesheet">
+    <link href="css/map.css?v=1.0.beta.2" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
@@ -29,14 +29,17 @@
       </div>
     </div>
     <div id="newPinMessage" class="hidden">
-      <br />
-      <p>
-        {{ _("Is the marker in the correct place?") }}<br />
-        {{ _("You can drag the pin to make corrections.") }}
-      </p>
-      <p>
-        <button class="btn btn-primary btn-block" onclick="openModalForm()">{{ _("Continue") }}</button>
-      </p>
+      <div id="newPinMessageContainer">
+        <br />
+        <p>
+          {{ _("Is the marker in the correct place?") }}<br />
+          {{ _("You can drag the pin to make corrections.") }}<br /><br />
+          {{ _("For your safety we suggest placing your pin on something other than your actual address.") }}
+        </p>
+        <p>
+          <button class="btn btn-primary btn-block" onclick="openModalForm()">{{ _("Continue") }}</button>
+        </p>
+      </div>
     </div>
     <div id="aboutContent" class="hidden">
       <img id='logoImg' src='/images/logo.png' />

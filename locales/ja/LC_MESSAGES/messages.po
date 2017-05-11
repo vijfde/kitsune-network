@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-10 16:56-0400\n"
-"PO-Revision-Date: 2017-05-10 16:59-0400\n"
+"POT-Creation-Date: 2017-05-10 21:28-0400\n"
+"PO-Revision-Date: 2017-05-10 21:31-0400\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
+"X-Generator: Poedit 2.0.1\n"
 
 #: entities.py:55 entities.py:61
 msgid "All fields are required."
@@ -46,7 +47,7 @@ msgstr "表示されるまでに数分かかることがあります"
 msgid "If it does not appear within 10 minutes, check your spam folder."
 msgstr "10分以内に表示されない場合は、迷惑メールフォルダを確認してください"
 
-#: templates/email_sent.html:13 templates/map.html:24 templates/map.html:62
+#: templates/email_sent.html:13 templates/map.html:24 templates/map.html:65
 #: templates/pin/pin_form.html:72 templates/pin_updated.html:7
 msgid "Close"
 msgstr "閉じる"
@@ -55,39 +56,45 @@ msgstr "閉じる"
 msgid "Pin Activated"
 msgstr "ピン活性化"
 
-#: templates/map.html:34
+#: templates/map.html:35
 msgid "Is the marker in the correct place?"
 msgstr "マーカーは正しい場所にありますか"
 
-#: templates/map.html:35
+#: templates/map.html:36
 msgid "You can drag the pin to make corrections."
 msgstr "ピンをドラッグして修正することができます"
 
-#: templates/map.html:38
+#: templates/map.html:37
+msgid ""
+"For your safety we suggest placing your pin on something other than your "
+"actual address."
+msgstr "安全のため、実際の住所以外にピンを置くことをおすすめします"
+
+#: templates/map.html:40
 msgid "Continue"
 msgstr "続行"
 
-#: templates/map.html:52
+#: templates/map.html:55
 msgid "Help translate Kitsune Network"
 msgstr "Kitsune Networkの翻訳に役立ちます"
 
-#: templates/map.html:56
+#: templates/map.html:59
 msgid "To edit your pin, enter your email below."
 msgstr "ピンを編集するには、下にメールアドレスを入力してください"
 
-#: templates/map.html:59
+#: templates/map.html:62
 msgid "Email"
 msgstr "Eメール"
 
-#: templates/map.html:60
+#: templates/map.html:63
 msgid "Edit Pin"
 msgstr "ピンの編集"
 
-#: templates/map.html:69
+#: templates/map.html:72
 msgid "More"
 msgstr "より多い"
 
-#: templates/map.html:70
+#: templates/map.html:73
 msgid "Add Pin"
 msgstr "追加"
 
@@ -171,3 +178,6 @@ msgstr "なし"
 msgid "About You"
 msgstr "あなたについて"
 
+#: templates/pin/pin_form.html:65
+msgid "Please do not put any personal identifying information here"
+msgstr "個人識別情報はここには載せないでください"
