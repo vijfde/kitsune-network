@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-10 21:28-0400\n"
-"PO-Revision-Date: 2017-05-10 21:31-0400\n"
+"POT-Creation-Date: 2017-05-11 18:03-0400\n"
+"PO-Revision-Date: 2017-05-11 18:05-0400\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Generated-By: Babel 2.4.0\n"
 "X-Generator: Poedit 2.0.1\n"
 
-#: entities.py:55 entities.py:61
+#: entities.py:58 entities.py:64
 msgid "All fields are required."
 msgstr "全て必須項目です"
 
-#: entities.py:57
+#: entities.py:60
 msgid "A valid email address is required."
 msgstr "有効なメールアドレスが必要です"
 
-#: entities.py:59
+#: entities.py:62
 msgid "A pin already exists for this email address."
 msgstr "このメールアドレス用のピンが既に存在します"
 
@@ -141,6 +141,14 @@ msgstr "新しいピンを作成する"
 #: templates/pin/new_pin_form.html:5
 msgid "Email Address"
 msgstr "電子メールアドレス"
+
+#: templates/pin/new_pin_form.html:7
+msgid ""
+"An email address is required to avoid spam and allow you to edit your "
+"pin later."
+msgstr ""
+"スパムを避け、後でピンを編集できるようにするには、メールアドレスが必要で"
+"す"
 
 #: templates/pin/new_pin_form.html:7
 msgid "We'll never share your email with anyone else."
