@@ -44,15 +44,22 @@ class MainHandler(webapp2.RequestHandler):
                 self.redirect('/')
                 return
         template_values["show_modal_onload"] = show_modal_onload
+        template_values["cookie_language"] = self.request.cookies.get('language')
+        template_values["languages_dict"] = constants.languages
+        template_values["languages_display_sort"] = constants.languages_display_sort
         template = JINJA_ENVIRONMENT.get_template('templates/map.html')
         setup_i18n(self.request)
         self.response.write(template.render(template_values))
 
 def get_translations(request):
-    header = request.headers.get('Accept-Language', '')  # e.g. en-gb,en;q=0.8,es-es;q=0.5,eu;q=0.3
-    list_of_desired_locales = [locale.split(';')[0] for locale in header.split(',')]
-    if "en" in list_of_desired_locales:
-        list_of_desired_locales = None
+    cookie_language = request.cookies.get('language')
+    if cookie_language:
+        list_of_desired_locales = cookie_language
+    else:
+        header = request.headers.get('Accept-Language', '')  # e.g. en-gb,en;q=0.8,es-es;q=0.5,eu;q=0.3
+        list_of_desired_locales = [locale.split(';')[0] for locale in header.split(',')]
+        if "en" in list_of_desired_locales:
+            list_of_desired_locales = None
     locale_dir = "locales"
     translations = Translations.load(locale_dir, list_of_desired_locales)
     return translations

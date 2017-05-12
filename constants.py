@@ -51,3 +51,14 @@ communities = {
     "4": "vk.com/babymetal",
 }
 communities_display_sort = ['1', '2', '3', '4']
+languages = {
+    'en': '🇺🇸 English'.decode('utf8'),
+    'ja': '🇯🇵 Japanese'.decode('utf8'),
+    'ru': '🇷🇺 Russian'.decode('utf8'),
+    'de': '🇩🇪 German'.decode('utf8'),
+    'nl': '🇳🇱 Dutch'.decode('utf8'),
+    'es': '🇲🇽 Spanish'.decode('utf8'),
+    'no': '🇳🇴 Norwegian'.decode('utf8'),
+    'fr': '🇫🇷 French'.decode('utf8'),
+}
+languages_display_sort = ['en', 'ja', 'ru', 'de', 'nl', 'es', 'no', 'fr']

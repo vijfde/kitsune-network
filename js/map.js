@@ -155,6 +155,11 @@ function setupBottomCenterControl(map) {
 
   showAboutUI.addEventListener('click', function() {
     openModal(document.getElementById('aboutContent').innerHTML);
+    var languageSelector = document.getElementById("languageSelector");
+    languageSelector.addEventListener("input", function () {
+      document.cookie = "language=" + languageSelector.value;
+      location.reload();
+    });
   });
 
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(controlDiv);

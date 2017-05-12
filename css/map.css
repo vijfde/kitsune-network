@@ -22,6 +22,9 @@ html, body {
   width: 45px !important;
   float: left;
 }
+#languageSelector {
+  height: 30px;
+}
 #editPinForm {
   margin: 10px 0 10px 0;
   display: inline-block;
