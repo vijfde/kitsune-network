@@ -1,5 +1,6 @@
 # pybabel extract -o locales/messages.pot -F main.mapping .
 # pybabel update -d locales -i locales/messages.pot -l ja
+# pybabel init -d locales -i locales/messages.pot -l ru
 
 [ignore: lib/**]
 

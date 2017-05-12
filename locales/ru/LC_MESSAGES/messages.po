@@ -1,0 +1,194 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-05-11 18:03-0400\n"
+"PO-Revision-Date: 2017-05-11 21:06-0400\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.0.1\n"
+
+#: entities.py:58 entities.py:64
+msgid "All fields are required."
+msgstr "Необходимо заполнить все поля"
+
+#: entities.py:60
+msgid "A valid email address is required."
+msgstr "Электронная почта указана неверно"
+
+#: entities.py:62
+msgid "A pin already exists for this email address."
+msgstr "Для этой электронной почты уже существует метка"
+
+#: templates/email_sent.html:2
+msgid "Email Sent"
+msgstr "Письмо было отправлено"
+
+#: templates/email_sent.html:5
+msgid "An email has been sent to you."
+msgstr "Письмо было отправлено на вашу электронную почту"
+
+#: templates/email_sent.html:7
+msgid "It may take a few minutes to appear."
+msgstr "Доставка письма может занять несколько минут"
+
+#: templates/email_sent.html:9
+msgid "If it does not appear within 10 minutes, check your spam folder."
+msgstr "Если письмо не придет в течение 10 минут, проверьте папку спам"
+
+#: templates/email_sent.html:13 templates/map.html:24 templates/map.html:65
+#: templates/pin/pin_form.html:72 templates/pin_updated.html:7
+msgid "Close"
+msgstr "Закрыть"
+
+#: templates/map.html:21
+msgid "Pin Activated"
+msgstr "Метка установлена"
+
+#: templates/map.html:35
+msgid "Is the marker in the correct place?"
+msgstr "Метка находится в нужном месте?"
+
+#: templates/map.html:36
+msgid "You can drag the pin to make corrections."
+msgstr "Метку можно перемещать мышью для внесения изменений в положении"
+
+#: templates/map.html:37
+msgid ""
+"For your safety we suggest placing your pin on something other than your "
+"actual address."
+msgstr ""
+"Ради вашей же безопасности рекомендуем устанавливать метку не на своем "
+"адресе проживания"
+
+#: templates/map.html:40
+msgid "Continue"
+msgstr "Продолжить"
+
+#: templates/map.html:55
+msgid "Help translate Kitsune Network"
+msgstr "Помочь в переводе Kitsune Network"
+
+#: templates/map.html:59
+msgid "To edit your pin, enter your email below."
+msgstr "Чтобы отредактировать метку, введите электронный адрес ниже"
+
+#: templates/map.html:62
+msgid "Email"
+msgstr "Электронная почта"
+
+#: templates/map.html:63
+msgid "Edit Pin"
+msgstr "Редактировать метку"
+
+#: templates/map.html:72
+msgid "More"
+msgstr "Еще"
+
+#: templates/map.html:73
+msgid "Add Pin"
+msgstr "Добавить метку"
+
+#: templates/pin/pin_form.html:22 templates/pin_info_window.html:3
+msgid "Favorite Member"
+msgstr "Любимая участница"
+
+#: templates/pin/pin_form.html:36 templates/pin_info_window.html:5
+msgid "Favorite Song"
+msgstr "Любимая песня"
+
+#: templates/pin_info_window.html:8
+msgid "Communities"
+msgstr "Сообщества"
+
+#: templates/pin/pin_form.html:50 templates/pin_info_window.html:15
+msgid "Community"
+msgstr "Сообщество"
+
+#: templates/pin_info_window.html:18
+msgid "About Me"
+msgstr "Обо мне"
+
+#: templates/pin_updated.html:1
+msgid "Pin Updated"
+msgstr "Метка обновлена"
+
+#: templates/pin_updated.html:4
+msgid "Your pin has been updated."
+msgstr "Ваша метка была обновлена"
+
+#: templates/pin/edit_pin_form.html:2
+msgid "Edit Your Pin"
+msgstr "Редактировать вашу метку"
+
+#: templates/pin/edit_pin_form.html:18
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/pin/new_pin_form.html:2
+msgid "Create A New Pin"
+msgstr "Создать новую метку"
+
+#: templates/pin/new_pin_form.html:5
+msgid "Email Address"
+msgstr "Электронная почта"
+
+#: templates/pin/new_pin_form.html:7
+msgid ""
+"An email address is required to avoid spam and allow you to edit your "
+"pin later."
+msgstr ""
+"Электронная почта необходима для избежания спама, а также для "
+"возможности редактирования метки в будущем"
+
+#: templates/pin/new_pin_form.html:7
+msgid "We'll never share your email with anyone else."
+msgstr "Мы никому не сообщим вашу электронную почту"
+
+#: templates/pin/new_pin_form.html:10
+msgid "Send Activation Email"
+msgstr "Отправить письмо с активацией"
+
+#: templates/pin/pin_form.html:4
+msgid "Name"
+msgstr "Имя"
+
+#: templates/pin/pin_form.html:8
+msgid "Icon"
+msgstr "Иконка"
+
+#: templates/pin/pin_form.html:24 templates/pin/pin_form.html:38
+msgid "Select One"
+msgstr "Выберите одну"
+
+#: templates/pin/pin_form.html:25 templates/pin/pin_form.html:39
+msgid "They are all my favorite"
+msgstr "Мне нравятся все"
+
+#: templates/pin/pin_form.html:52
+msgid "Select At Least One"
+msgstr "Выберите хотя бы одно"
+
+#: templates/pin/pin_form.html:53
+msgid "None"
+msgstr "Ни одно из этих"
+
+#: templates/pin/pin_form.html:64
+msgid "About You"
+msgstr "О вас"
+
+#: templates/pin/pin_form.html:65
+msgid "Please do not put any personal identifying information here"
+msgstr "Пожалуйста, не пишите сюда никакой личной информации"

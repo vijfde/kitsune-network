@@ -1,0 +1,189 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-05-11 18:03-0400\n"
+"PO-Revision-Date: 2017-05-11 21:00-0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: entities.py:58 entities.py:64
+msgid "All fields are required."
+msgstr ""
+
+#: entities.py:60
+msgid "A valid email address is required."
+msgstr ""
+
+#: entities.py:62
+msgid "A pin already exists for this email address."
+msgstr ""
+
+#: templates/email_sent.html:2
+msgid "Email Sent"
+msgstr ""
+
+#: templates/email_sent.html:5
+msgid "An email has been sent to you."
+msgstr ""
+
+#: templates/email_sent.html:7
+msgid "It may take a few minutes to appear."
+msgstr ""
+
+#: templates/email_sent.html:9
+msgid "If it does not appear within 10 minutes, check your spam folder."
+msgstr ""
+
+#: templates/email_sent.html:13 templates/map.html:24 templates/map.html:65
+#: templates/pin/pin_form.html:72 templates/pin_updated.html:7
+msgid "Close"
+msgstr ""
+
+#: templates/map.html:21
+msgid "Pin Activated"
+msgstr ""
+
+#: templates/map.html:35
+msgid "Is the marker in the correct place?"
+msgstr ""
+
+#: templates/map.html:36
+msgid "You can drag the pin to make corrections."
+msgstr ""
+
+#: templates/map.html:37
+msgid ""
+"For your safety we suggest placing your pin on something other than your "
+"actual address."
+msgstr ""
+
+#: templates/map.html:40
+msgid "Continue"
+msgstr ""
+
+#: templates/map.html:55
+msgid "Help translate Kitsune Network"
+msgstr ""
+
+#: templates/map.html:59
+msgid "To edit your pin, enter your email below."
+msgstr ""
+
+#: templates/map.html:62
+msgid "Email"
+msgstr ""
+
+#: templates/map.html:63
+msgid "Edit Pin"
+msgstr ""
+
+#: templates/map.html:72
+msgid "More"
+msgstr ""
+
+#: templates/map.html:73
+msgid "Add Pin"
+msgstr ""
+
+#: templates/pin/pin_form.html:22 templates/pin_info_window.html:3
+msgid "Favorite Member"
+msgstr ""
+
+#: templates/pin/pin_form.html:36 templates/pin_info_window.html:5
+msgid "Favorite Song"
+msgstr ""
+
+#: templates/pin_info_window.html:8
+msgid "Communities"
+msgstr ""
+
+#: templates/pin/pin_form.html:50 templates/pin_info_window.html:15
+msgid "Community"
+msgstr ""
+
+#: templates/pin_info_window.html:18
+msgid "About Me"
+msgstr ""
+
+#: templates/pin_updated.html:1
+msgid "Pin Updated"
+msgstr ""
+
+#: templates/pin_updated.html:4
+msgid "Your pin has been updated."
+msgstr ""
+
+#: templates/pin/edit_pin_form.html:2
+msgid "Edit Your Pin"
+msgstr ""
+
+#: templates/pin/edit_pin_form.html:18
+msgid "Save"
+msgstr ""
+
+#: templates/pin/new_pin_form.html:2
+msgid "Create A New Pin"
+msgstr ""
+
+#: templates/pin/new_pin_form.html:5
+msgid "Email Address"
+msgstr ""
+
+#: templates/pin/new_pin_form.html:7
+msgid ""
+"An email address is required to avoid spam and allow you to edit your pin"
+" later."
+msgstr ""
+
+#: templates/pin/new_pin_form.html:7
+msgid "We'll never share your email with anyone else."
+msgstr ""
+
+#: templates/pin/new_pin_form.html:10
+msgid "Send Activation Email"
+msgstr ""
+
+#: templates/pin/pin_form.html:4
+msgid "Name"
+msgstr ""
+
+#: templates/pin/pin_form.html:8
+msgid "Icon"
+msgstr ""
+
+#: templates/pin/pin_form.html:24 templates/pin/pin_form.html:38
+msgid "Select One"
+msgstr ""
+
+#: templates/pin/pin_form.html:25 templates/pin/pin_form.html:39
+msgid "They are all my favorite"
+msgstr ""
+
+#: templates/pin/pin_form.html:52
+msgid "Select At Least One"
+msgstr ""
+
+#: templates/pin/pin_form.html:53
+msgid "None"
+msgstr ""
+
+#: templates/pin/pin_form.html:64
+msgid "About You"
+msgstr ""
+
+#: templates/pin/pin_form.html:65
+msgid "Please do not put any personal identifying information here"
+msgstr ""
+
