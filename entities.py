@@ -36,6 +36,21 @@ class Pin(ndb.Model):
             url = '/tasks/send_discord_web_hook',
             params = { 'message': content })
 
+    def send_discord_moderation_web_hook(self):
+        pin_details = 'ID: ' + str(self.key.id())
+        pin_details += '\nIP: ' + self.user_ip_address
+        pin_details += '\nEmail: ' + self.email
+        pin_details += '\nTitle: ' + self.name
+        pin_details += '\nCommunities: ' + self.communities
+        pin_details += '\nAbout: \n' + self.about_you
+        content = """**Pin Putted**```%s```""" % pin_details
+        task = taskqueue.add(
+            url = '/tasks/send_discord_moderation_web_hook',
+            params = { 'message': content })
+
+    def _post_put_hook(self, future):
+        self.send_discord_moderation_web_hook()
+
     @classmethod
     def validate_pin_values(cls, request_values, is_new_pin, translations):
         form_error_message = None
