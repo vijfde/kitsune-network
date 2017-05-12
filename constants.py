@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+pin_icons = ['1', '2', '3', '4']
 members = {
     '0': "They are all my favorite",
     '1': 'スーメタル / SU-METAL / Queen Su'.decode('utf8'),

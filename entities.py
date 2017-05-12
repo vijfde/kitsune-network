@@ -66,8 +66,13 @@ class Pin(ndb.Model):
             favorite_member = int(request_values.get('favorite_member'))
             favorite_song = int(request_values.get('favorite_song'))
             communities = request_values.get('communities')
-             # this will raise an error if the communities string is invalid
-            [int(x) for x in communities.split(',')]
+
+            if not str(pin_icon) in constants.pin_icons:
+                form_error_message = translations.gettext("All fields are required.")
+                return form_error_message
+            constants.songs[str(favorite_song)]
+            constants.members[str(favorite_member)]
+            [constants.communities[str(community)] for community in communities.split(',')]
 
             if not name or not about_you or (is_new_pin and not email):
                 form_error_message = translations.gettext("All fields are required.")
