@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import base64
 import uuid
 
@@ -43,7 +44,8 @@ class Pin(ndb.Model):
         pin_details += '\nTitle: ' + self.name
         pin_details += '\nCommunities: ' + self.communities
         pin_details += '\nAbout: \n' + self.about_you
-        content = """**Pin Putted**```%s```""" % pin_details
+        content = "** ⛳️ ------------- 🏌️ **".decode('utf8')
+        content += "```%s```" % pin_details
         task = taskqueue.add(
             url = '/tasks/send_discord_moderation_web_hook',
             params = { 'message': content })
