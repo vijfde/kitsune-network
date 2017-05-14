@@ -50,9 +50,6 @@ class Pin(ndb.Model):
             url = '/tasks/send_discord_moderation_web_hook',
             params = { 'message': content })
 
-    def _post_put_hook(self, future):
-        self.send_discord_moderation_web_hook()
-
     @classmethod
     def validate_pin_values(cls, request_values, is_new_pin, translations):
         form_error_message = None

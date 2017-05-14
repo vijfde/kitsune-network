@@ -150,6 +150,7 @@ class ManagePinHandler(webapp2.RequestHandler):
             return
 
         pin.set_pin_values(self.request.POST, self.request.remote_addr, False, translations)
+        pin.send_discord_moderation_web_hook()
 
         template = JINJA_ENVIRONMENT.get_template('templates/pin_updated.html')
         setup_i18n(self.request)
