@@ -41,6 +41,9 @@ class Pin(ndb.Model):
         pin_details = 'ID: ' + str(self.key.id())
         pin_details += '\nIP: ' + self.user_ip_address
         pin_details += '\nEmail: ' + self.email
+        pin_details += '\nPin Icon: ' + str(self.pin_icon)
+        pin_details += '\nFav Member: ' + str(self.favorite_member)
+        pin_details += '\nFav Song: ' + str(self.favorite_song)
         pin_details += '\nTitle: ' + self.name
         pin_details += '\nCommunities: ' + self.communities
         pin_details += '\nAbout: \n' + self.about_you
