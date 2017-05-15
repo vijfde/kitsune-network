@@ -3,7 +3,12 @@ import urllib
 import json
 import re
 
+from google.appengine.api import app_identity
+
 import credentials
+
+def is_production_env():
+    return app_identity.get_application_id() == 'kitsunemap'
 
 def is_valid_email(email):
     if not email:
@@ -48,7 +53,10 @@ def send_email(recipient, access_uuid, is_edit):
     http.add_credentials('api', credentials.MAILGUN_API_KEY)
 
     action = "edit" if is_edit else "activate"
-    url = "https://kitsune.network/?%sPin=%s" % (action, access_uuid)
+    protocol = 'https' if is_production_env() else 'http'
+    hostname = 'kitsune.network' if is_production_env() else app_identity.get_default_version_hostname()
+    host = protocol +  '://' + hostname
+    url = "%s/?%sPin=%s" % (host, action, access_uuid)
     html_message = """
         <a href="%s">Click here to %s your pin.</a>
         <p />
@@ -57,7 +65,7 @@ def send_email(recipient, access_uuid, is_edit):
         %s
     """ % (url, action, url)
 
-    domain = 'kitsune.network'
+    domain = 'kitsune.network' if is_production_env() else 'sandbox7b1ee101c872433f8911490bb3a9ba3b.mailgun.org'
     url = 'https://api.mailgun.net/v3/%s/messages' % domain
     header_action = "Edit" if is_edit else "Activate"
     data = {
