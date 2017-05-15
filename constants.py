@@ -56,7 +56,7 @@ languages = {
     'en': '🇺🇸 English'.decode('utf8'),
     'ja': '🇯🇵 日本語'.decode('utf8'),
     'ru': '🇷🇺 русский'.decode('utf8'),
-    'de': '🇩🇪 Deutsche'.decode('utf8'),
+    'de': '🇩🇪 Deutsch'.decode('utf8'),
     'nl': '🇳🇱 Nederlands'.decode('utf8'),
     'es': '🇲🇽 Español'.decode('utf8'),
     'no': '🇳🇴 norsk'.decode('utf8'),
