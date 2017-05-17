@@ -7,7 +7,7 @@ members = {
     '2': 'モアメタル / MOAMETAL / Angel of Love'.decode('utf8'),
     '3': 'ユイメタル / YUIMETAL / Angel of Dance'.decode('utf8'),
 }
-members_display_sort = [1, 2, 3]
+members_display_sort = range(1, 4)
 
 songs = {
     "0": "They are all my favorite",
@@ -45,7 +45,7 @@ songs = {
     "32": "Love Machine",
     "33": "Soul's Refrain",
 }
-songs_display_sort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+songs_display_sort = range(1, 34)
 
 communities = {
     "0": "None",
@@ -54,7 +54,7 @@ communities = {
     "3": "/r/BABYMETAL_japan",
     "4": "vk.com/babymetal",
 }
-communities_display_sort = [1, 2, 3, 4]
+communities_display_sort = range(1, 5)
 
 languages = {
     'en': '🇺🇸 English'.decode('utf8'),
