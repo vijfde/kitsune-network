@@ -69,6 +69,7 @@ def setup_i18n(request):
     JINJA_ENVIRONMENT.install_gettext_translations(translations)
 
 def add_constants(template_values):
+    template_values["pin_icons"] = constants.pin_icons
     template_values["songs_dict"] = constants.songs
     template_values["songs_display_sort"] = constants.songs_display_sort
     template_values["members_dict"] = constants.members

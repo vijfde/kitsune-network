@@ -7,11 +7,11 @@
   <div class="form-group">
     <label class="control-label" for="inputPinIcon">{{ _("Icon") }}</label>
     <br />
-    {% for index in range(1, 5) %}
+    {% for pin_icon in pin_icons %}
       <div class="pin-input">
-        {% set pin_checked_text = "checked" if pin is defined and index == pin.pin_icon else "" %}
-        <input type="radio" name="inputPinIcon" value="{{ index }}" {{ pin_checked_text }} />
-        <img src="/images/pins/{{ index }}.png" />
+        {% set pin_checked_text = "checked" if pin is defined and pin_icon == pin.pin_icon else "" %}
+        <input type="radio" name="inputPinIcon" value="{{ pin_icon }}" {{ pin_checked_text }} />
+        <img src="/images/pins/{{ pin_icon }}.png" />
       </div>
     {% endfor %}
   </div>
