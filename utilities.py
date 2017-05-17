@@ -2,13 +2,16 @@ import httplib2
 import urllib
 import json
 import re
+import os
 
 from google.appengine.api import app_identity
 
 import credentials
 
-def is_production_env():
-    return app_identity.get_application_id() == 'kitsunemap'
+def is_production():
+    is_production_server = os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/')
+    is_production_application_id = app_identity.get_application_id() == 'kitsunemap'
+    return is_production_server and is_production_application_id
 
 def is_valid_email(email):
     if not email:
@@ -53,8 +56,8 @@ def send_email(recipient, access_uuid, is_edit):
     http.add_credentials('api', credentials.MAILGUN_API_KEY)
 
     action = "edit" if is_edit else "activate"
-    protocol = 'https' if is_production_env() else 'http'
-    hostname = 'kitsune.network' if is_production_env() else app_identity.get_default_version_hostname()
+    protocol = 'https' if is_production() else 'http'
+    hostname = 'kitsune.network' if is_production() else app_identity.get_default_version_hostname()
     host = protocol +  '://' + hostname
     url = "%s/?%sPin=%s" % (host, action, access_uuid)
     html_message = """
@@ -65,7 +68,7 @@ def send_email(recipient, access_uuid, is_edit):
         %s
     """ % (url, action, url)
 
-    domain = 'kitsune.network' if is_production_env() else 'sandbox7b1ee101c872433f8911490bb3a9ba3b.mailgun.org'
+    domain = 'kitsune.network' if is_production() else 'sandbox7b1ee101c872433f8911490bb3a9ba3b.mailgun.org'
     url = 'https://api.mailgun.net/v3/%s/messages' % domain
     header_action = "Edit" if is_edit else "Activate"
     data = {

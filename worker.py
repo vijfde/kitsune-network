@@ -4,11 +4,11 @@ import urllib
 import webapp2
 
 import credentials
-from utilities import send_email, is_production_env
+from utilities import send_email, is_production
 
 class SendDiscordWebHookHandler(webapp2.RequestHandler):
     def post(self):
-        if is_production_env():
+        if is_production():
             url = credentials.DISCORD_WEB_HOOK_URL
         else:
             url = credentials.DISCORD_DEBUG_WEB_HOOK_URL
@@ -16,7 +16,7 @@ class SendDiscordWebHookHandler(webapp2.RequestHandler):
 
 class SendDiscordModerationWebHookHandler(webapp2.RequestHandler):
     def post(self):
-        if is_production_env():
+        if is_production():
             url = credentials.DISCORD_MODERATION_WEB_HOOK_URL
         else:
             url = credentials.DISCORD_DEBUG_WEB_HOOK_URL
