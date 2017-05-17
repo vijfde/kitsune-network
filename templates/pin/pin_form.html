@@ -9,11 +9,8 @@
     <br />
     {% for index in range(1, 5) %}
       <div class="pin-input">
-        {% if pin is defined and index == pin.pin_icon %}
-          <input type="radio" name="inputPinIcon" value="{{ index }}" checked />
-        {% else %}
-          <input type="radio" name="inputPinIcon" value="{{ index }}" />
-        {% endif %}
+        {% set pin_checked_text = "checked" if pin is defined and index == pin.pin_icon else "" %}
+        <input type="radio" name="inputPinIcon" value="{{ index }}" {{ pin_checked_text }} />
         <img src="/images/pins/{{ index }}.png" />
       </div>
     {% endfor %}
@@ -24,11 +21,8 @@
       <option value="" selected disabled>{{ _("Select One") }}</option>
       <option value="0" selected >{{ _("They are all my favorite") }}</option>
       {% for member_id in members_display_sort %}
-        {% if pin is defined and member_id|int == pin.favorite_member %}
-          <option value="{{ member_id }}" selected >{{ members_dict[member_id] }}</option>
-        {% else %}
-          <option value="{{ member_id }}">{{ members_dict[member_id] }}</option>
-        {% endif %}
+        {% set member_selected_text = "selected" if pin is defined and member_id|int == pin.favorite_member else "" %}
+        <option value="{{ member_id }}" {{ member_selected_text }} >{{ members_dict[member_id] }}</option>
       {% endfor %}
     </select>
   </div>
@@ -38,12 +32,9 @@
       <option value="" selected disabled>{{ _("Select One") }}</option>
       <option value="0" selected >{{ _("They are all my favorite") }}</option>
       {% for song_id in songs_display_sort %}
-        {% if pin is defined and song_id|int == pin.favorite_song %}
-          <option value="{{ song_id }}" selected >{{ songs_dict[song_id] }}</option>
-        {% else %}
-          <option value="{{ song_id }}">{{ songs_dict[song_id] }}</option>
-        {% endif %}
-      {% endfor %}
+        {% set song_selected_text = "selected" if pin is defined and song_id|int == pin.favorite_song else "" %}
+        <option value="{{ song_id }}" {{ song_selected_text }} >{{ songs_dict[song_id] }}</option>
+       {% endfor %}
     </select>
   </div>
   <div class="form-group">
@@ -52,11 +43,8 @@
       <option value="" disabled>{{ _("Select At Least One") }}</option>
       <option value="0" selected >{{ _("None") }}</option>
       {% for community_id in communities_display_sort %}
-        {% if pin is defined and community_id|int in pin_communities %}
-          <option value="{{ community_id }}" selected >{{ communities_dict[community_id] }}</option>
-        {% else %}
-          <option value="{{ community_id }}">{{ communities_dict[community_id] }}</option>
-        {% endif %}
+        {% set community_selected_text = "selected" if pin is defined and community_id|int in pin_communities else "" %}
+        <option value="{{ community_id }}" {{ community_selected_text }} >{{ communities_dict[community_id] }}</option>
       {% endfor %}
     </select>
   </div>
