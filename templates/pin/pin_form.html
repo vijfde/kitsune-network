@@ -41,7 +41,7 @@
     <label class="control-label" for="inputCommunities">{{ _("Community") }}</label>
     <select multiple="" class="form-control" id="inputCommunities" aria-describedby="communityHelp">
       <option value="" disabled>{{ _("Select At Least One") }}</option>
-      <option value="0" selected >{{ _("None") }}</option>
+      <option value="0" {{ "" if pin is defined and not 0 in pin_communities else "selected" }} >{{ _("None") }}</option>
       {% for community_id in communities_display_sort %}
         {% set community_selected_text = "selected" if pin is defined and community_id in pin_communities else "" %}
         <option value="{{ community_id }}" {{ community_selected_text }} >{{ communities_dict[community_id|string] }}</option>
