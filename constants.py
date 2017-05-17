@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-pin_icons = ['1', '2', '3', '4']
+pin_icons = [1, 2, 3, 4]
+
 members = {
     '0': "They are all my favorite",
     '1': 'スーメタル / SU-METAL / Queen Su'.decode('utf8'),
     '2': 'モアメタル / MOAMETAL / Angel of Love'.decode('utf8'),
     '3': 'ユイメタル / YUIMETAL / Angel of Dance'.decode('utf8'),
 }
-members_display_sort = ['1', '2', '3']
+members_display_sort = [1, 2, 3]
+
 songs = {
     "0": "They are all my favorite",
     "1": "Doki Doki ☆ Morning / ド・キ・ド・キ☆モーニング".decode('utf8'),
@@ -43,7 +45,8 @@ songs = {
     "32": "Love Machine",
     "33": "Soul's Refrain",
 }
-songs_display_sort = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33']
+songs_display_sort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+
 communities = {
     "0": "None",
     "1": "THE ONE",
@@ -51,7 +54,8 @@ communities = {
     "3": "/r/BABYMETAL_japan",
     "4": "vk.com/babymetal",
 }
-communities_display_sort = ['1', '2', '3', '4']
+communities_display_sort = [1, 2, 3, 4]
+
 languages = {
     'en': '🇺🇸 English'.decode('utf8'),
     'ja': '🇯🇵 日本語'.decode('utf8'),

@@ -69,7 +69,7 @@ class Pin(ndb.Model):
             favorite_song = int(request_values.get('favorite_song'))
             communities = request_values.get('communities')
 
-            if not str(pin_icon) in constants.pin_icons:
+            if not pin_icon in constants.pin_icons:
                 form_error_message = translations.gettext("All fields are required.")
                 return form_error_message
             constants.songs[str(favorite_song)]

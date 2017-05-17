@@ -21,8 +21,8 @@
       <option value="" selected disabled>{{ _("Select One") }}</option>
       <option value="0" selected >{{ _("They are all my favorite") }}</option>
       {% for member_id in members_display_sort %}
-        {% set member_selected_text = "selected" if pin is defined and member_id|int == pin.favorite_member else "" %}
-        <option value="{{ member_id }}" {{ member_selected_text }} >{{ members_dict[member_id] }}</option>
+        {% set member_selected_text = "selected" if pin is defined and member_id == pin.favorite_member else "" %}
+        <option value="{{ member_id }}" {{ member_selected_text }} >{{ members_dict[member_id|string] }}</option>
       {% endfor %}
     </select>
   </div>
@@ -32,8 +32,8 @@
       <option value="" selected disabled>{{ _("Select One") }}</option>
       <option value="0" selected >{{ _("They are all my favorite") }}</option>
       {% for song_id in songs_display_sort %}
-        {% set song_selected_text = "selected" if pin is defined and song_id|int == pin.favorite_song else "" %}
-        <option value="{{ song_id }}" {{ song_selected_text }} >{{ songs_dict[song_id] }}</option>
+        {% set song_selected_text = "selected" if pin is defined and song_id == pin.favorite_song else "" %}
+        <option value="{{ song_id }}" {{ song_selected_text }} >{{ songs_dict[song_id|string] }}</option>
        {% endfor %}
     </select>
   </div>
@@ -43,8 +43,8 @@
       <option value="" disabled>{{ _("Select At Least One") }}</option>
       <option value="0" selected >{{ _("None") }}</option>
       {% for community_id in communities_display_sort %}
-        {% set community_selected_text = "selected" if pin is defined and community_id|int in pin_communities else "" %}
-        <option value="{{ community_id }}" {{ community_selected_text }} >{{ communities_dict[community_id] }}</option>
+        {% set community_selected_text = "selected" if pin is defined and community_id in pin_communities else "" %}
+        <option value="{{ community_id }}" {{ community_selected_text }} >{{ communities_dict[community_id|string] }}</option>
       {% endfor %}
     </select>
   </div>
